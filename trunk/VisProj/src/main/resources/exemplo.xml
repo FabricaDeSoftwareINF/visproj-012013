@@ -1,0 +1,12 @@
+<Projetos versao="MAJOR.MINOR.FIX" propriedades="path.do.arquivo">
+    <project id="001" portifolioID="001" insertORupdate="Insert">
+        <value name="nomeProjeto">PROJETO DE BUILD</value>
+        <value name="Descricao">PROJETO RESPONSAVEL PELA ANALISE DE BUILD/COMPILACAO</value>
+        <value name="Metrica">CHAVE DA METRICA</value>
+        <value name="Metrica">CHAVE DA METRICA</value>
+    </project>
+    <row id="421" trl="Y">
+        <value column="Name" original="Sideline Revenue">Receitas secundárias</value>
+        <value column="Description" original=""/>
+    </row>
+</Projetos>
