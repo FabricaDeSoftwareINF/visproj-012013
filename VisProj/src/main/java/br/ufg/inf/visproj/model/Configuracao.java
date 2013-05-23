@@ -7,7 +7,6 @@ package br.ufg.inf.visproj.model;
 import java.util.Set;
 
 /**
- *
  * @author ArturPascualote
  */
 public class Configuracao {
@@ -17,9 +16,11 @@ public class Configuracao {
     private Nivel nivelInsatisfatorio;
     private Nivel nivelPoucoSatisfatorio;
     private Nivel nivelSatisfatorio;
+    private String id;
+
 
     public Configuracao() {
-        
+
     }
 
     public String getEquacao() {
@@ -60,5 +61,13 @@ public class Configuracao {
 
     public void setNivelSatisfatorio(Nivel nivelSatisfatorio) {
         this.nivelSatisfatorio = nivelSatisfatorio;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
