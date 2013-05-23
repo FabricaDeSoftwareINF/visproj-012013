@@ -5,16 +5,16 @@
 package br.ufg.inf.visproj.model;
 
 /**
- *
  * @author ArturPascualote
  */
 public class Projeto {
-    
+
     private GerenteDeProjeto gerenteDeProjeto;
     private EnumStatusDoProjeto statusDoProjeto;
     private Versao versaoAnterior;
     private Versao versaoAtual;
     private Configuracao configuracao;
+    private String id;
 
     public Projeto() {
         this.statusDoProjeto = EnumStatusDoProjeto.SEM_ALTERACOES;
@@ -60,7 +60,13 @@ public class Projeto {
         this.versaoAtual = versaoAtual;
     }
 
-   
-    
-    
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
 }
