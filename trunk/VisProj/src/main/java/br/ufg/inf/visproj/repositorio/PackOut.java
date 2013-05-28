@@ -2,13 +2,19 @@ package br.ufg.inf.visproj.repositorio;
 
 
 import br.ufg.inf.visproj.model.Projeto;
+import org.jdom2.Attribute;
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,35 +28,44 @@ import java.io.IOException;
 
 
 public class PackOut {
-    Projeto projeto;
 
 
-    public static void main(String[] args) {
+    boolean projeto2XML(Projeto projeto) {
 
-        Element agenda = new Element("PAI");
+        projeto.getId();
+        projeto.getGerenteDeProjeto();
+        projeto.getConfiguracao();
+        projeto.getStatusDoProjeto();
+        projeto.getVersaoAnterior();
+        projeto.getVersaoAtual();
+
+
+        Attribute id = new Attribute("id", Integer.toString(1));
+        Element arquivoProjeto = new Element("PROJETO");
+        arquivoProjeto.setAttribute(id.setValue("1"));
 
         //Define Agenda como root
 
-        Document documento = new Document(agenda);
+        Document documento = new Document(arquivoProjeto);
 
+        //Cria o elemento Contato
 
         for (int i = 0; i < 5; i++) {
-
-            Element contato = new Element("Filhos");
+            Element metrica = new Element("METRICA");
 
             //Adiciona o atributo id ao Contato
 
-            contato.setAttribute("id", Integer.toString(i));
+            metrica.setAttribute("id", "123");
 
             //Criando os elementos de contato
 
-            Element nome = new Element("nome");
+            Element nomeMetrica = new Element("nome");
 
-            nome.setText("Arthur");
+            nomeMetrica.setText("NOME_DA_METRICA");
 
-            Element telefone = new Element("Idade");
+            Element classificacaoMetrica = new Element("CLASSIFICACAO_DA_METRICA");
 
-            telefone.setText("24");
+            classificacaoMetrica.setText("123-456");
 
             Element endereco = new Element("endereco");
 
@@ -58,28 +73,26 @@ public class PackOut {
 
             Element email = new Element("email");
 
-            email.setText("sskkun@gmail.com");
+            email.setText("glaucioguerra@gmail.com");
 
-            //Adicionando os elementos nome, telefone,
+            //Adicionando elementos nome, telefone, endereco e email no Contato
 
-            //endereco e email em Contato
+            metrica.addContent(nomeMetrica);
 
-            contato.addContent(nome);
+            metrica.addContent(classificacaoMetrica);
 
-            contato.addContent(telefone);
+            metrica.addContent(endereco);
 
-            contato.addContent(endereco);
-
-            contato.addContent(email);
+            metrica.addContent(email);
 
             //Adicionado o Contato a Agenda
 
-            agenda.addContent(contato);
+            arquivoProjeto.addContent(metrica);
+
+            //Classe responsável para imprimir / gerar o XML
 
         }
-
-        XMLOutputter xout = new XMLOutputter();
-
+        XMLOutputter xout = new XMLOutputter(Format.getPrettyFormat());
 
         try {
 
@@ -92,15 +105,78 @@ public class PackOut {
             //Imprimindo o XML no arquivo
 
             xout.output(documento, arquivo);
+            return true;
+
 
         } catch (IOException e) {
 
             e.printStackTrace();
-
+            return false;
         }
 
 
     }
 
 
+    String coletaUltimoIdProjeto() {
+        String retorno = null;
+        File dados = new File("c://arquivo.xml");
+        SAXBuilder sb = new SAXBuilder();
+        Document projetoReader = null;
+        try {
+            projetoReader = sb.build(dados);
+        } catch (JDOMException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        Element projeto = projetoReader.getRootElement();
+
+        List elements = projeto.getChildren();
+
+        Iterator i = elements.iterator();
+
+        //Iteramos com os elementos filhos, e filhos dos filhos
+        while (i.hasNext()) {
+            Element element = (Element) i.next();
+            retorno = "ID: " + projeto.getAttributeValue("id");
+        }
+
+
+        return retorno;
+    }
+
+
+    Projeto xml2Projeto(Integer id) {
+        Projeto projeto = null;
+        File dados = new File("c://arquivo.xml");
+        SAXBuilder sb = new SAXBuilder();
+        Document projetoReader = null;
+        try {
+            projetoReader = sb.build(dados);
+        } catch (JDOMException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+        Element elementoProjeto = projetoReader.getRootElement();
+
+        List elements = elementoProjeto.getChildren();
+
+        Iterator i = elements.iterator();
+
+        //Iteramos com os elementos filhos, e filhos dos filhos
+        while (i.hasNext()) {
+            Element element = (Element) i.next();
+            projeto.setId(elementoProjeto.getAttributeValue("id"));
+        }
+
+
+        return projeto;
+    }
+
+
 }
+
+
+
