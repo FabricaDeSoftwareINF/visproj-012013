@@ -69,4 +69,23 @@ public class Projeto {
     }
 
 
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
+            return false; //nenhum objeto pode ser igual a null
+        }
+        if (!(obj instanceof Projeto)) { //um projeto só pode ser igual a outro projeto
+            return false;
+        }
+
+        final Projeto outroProjeto = (Projeto) obj;
+
+        if (getId() == null) //se não houver Id não há como testar os dois projetos
+        {
+            return false;
+        }
+        return getId().equals(outroProjeto.getId()); //dois projetos serão iguais se seus Id's forem iguais
+    }
+
 }
