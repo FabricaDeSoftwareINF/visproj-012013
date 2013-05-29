@@ -70,4 +70,22 @@ public class Configuracao {
     public void setId(String id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Configuracao)) {
+            return false;
+        }
+
+        final Configuracao outraConfiguracao = (Configuracao) obj;
+
+        if (getId() == null) {
+            return false;
+        }
+        return getId().equals(outraConfiguracao.getId());
+    }
 }
