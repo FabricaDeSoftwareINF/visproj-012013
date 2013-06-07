@@ -29,6 +29,37 @@ import java.util.List;
 
 public class PackOut {
 
+    private File diretorio;
+    private File arquivo;
+
+
+    private boolean diretorioExiste(File diretorio) {
+        if (diretorio.exists()) {
+            System.out.println("Diretório existe!");
+            return true;
+        }
+        return false;  //To change body of created methods use File | Settings | File Templates.
+    }
+
+    boolean consultaArquivo(File diretorio, File arquivo) {
+
+
+        if (!diretorio.equals(arquivo.getAbsolutePath())) {
+            System.out.println("o Arquivo informado não pertence a este diretorio.");
+            return false;
+        }
+
+        if (diretorioExiste(this.diretorio)) {
+            if (arquivo.exists()) {
+                System.out.println("Diretório existe!");
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+
 
     boolean projeto2XML(Projeto projeto) {
 
@@ -176,6 +207,41 @@ public class PackOut {
     }
 
 
+    private class arquivoDir {
+        private String diretorio;
+        private String arquivo;
+        private String idProjeto;
+
+        private arquivoDir(String diretorio, String arquivo, String idProjeto) {
+            this.diretorio = diretorio;
+            this.arquivo = arquivo;
+            this.idProjeto = idProjeto;
+        }
+
+        public String getDiretorio() {
+            return diretorio;
+        }
+
+        public void setDiretorio(String diretorio) {
+            this.diretorio = diretorio;
+        }
+
+        public String getArquivo() {
+            return arquivo;
+        }
+
+        public void setArquivo(String arquivo) {
+            this.arquivo = arquivo;
+        }
+
+        public String getIdProjeto() {
+            return idProjeto;
+        }
+
+        public void setIdProjeto(String idProjeto) {
+            this.idProjeto = idProjeto;
+        }
+    }
 }
 
 
