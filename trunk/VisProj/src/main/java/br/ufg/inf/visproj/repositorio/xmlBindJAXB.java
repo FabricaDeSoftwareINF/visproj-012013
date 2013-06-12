@@ -1,18 +1,17 @@
 package br.ufg.inf.visproj.repositorio;
 
+import br.ufg.inf.visproj.model.*;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,157 +31,95 @@ public class xmlBindJAXB {
 
     public static void main(String args[]) {
 
+
         //Creating booking object for marshaling into XML document
-        projeto2XML p2xml = new projeto2XML();
+        Map<String, Float> metricas = new HashMap();
+        HashSet configMetricas = new HashSet<String>();
+        configMetricas.add("complexidade");
 
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        Date startDate = new Date();
-        Date endDate = new Date();
-        //System.out.println(new Timestamp(startDate.getTime()));
-        startDate = new Timestamp(startDate.getTime());
-        endDate = new Timestamp(endDate.getTime() + 100000);
+        Nivel nivelSatisfatorio = new Nivel();
+        nivelSatisfatorio.setMelhorQuandoMaior(true);
+        nivelSatisfatorio.setValorFinal(3.5f);
+        nivelSatisfatorio.setValorInicial(0f);
+
+        Nivel nivelInsatisfatorio = new Nivel();
+        nivelInsatisfatorio.setMelhorQuandoMaior(true);
+        nivelInsatisfatorio.setValorInicial(0f);
+        nivelInsatisfatorio.setValorFinal(4.0f);
+
+        Nivel nivelPoucoSatisfatorio = new Nivel();
+        nivelPoucoSatisfatorio.setMelhorQuandoMaior(false);
+        nivelPoucoSatisfatorio.setValorFinal(5.5f);
+        nivelPoucoSatisfatorio.setValorInicial(0.1f);
 
 
-        p2xml.setGerenteDeProjeto("OBJETO GERENTE DE PROJETO");
-        p2xml.setStatusDoProjeto("EXECUTANDO AGORA");
-        p2xml.setVersaoAnterior(1);
-        p2xml.setVersaoAtual(1.1);
-        p2xml.setStartDate(startDate);
-        p2xml.setEndDate(endDate);
-        p2xml.setConfiguracao("*****NOT IMPLEMENTED YET******");
+        Configuracao config = new Configuracao();
+        config.setId("id_config");
+        config.setEquacao("equacao");
+        config.setMetricas(configMetricas);
+        config.setNivelInsatisfatorio(nivelInsatisfatorio);
+        config.setNivelSatisfatorio(nivelSatisfatorio);
+        config.setNivelPoucoSatisfatorio(nivelPoucoSatisfatorio);
+
+
+        GerenteDeProjeto gerenteDeProjeto = new GerenteDeProjeto();
+        gerenteDeProjeto.setEmail("gerenteEmail");
+        gerenteDeProjeto.setNome("gerenteNome");
+        Versao versaoAtual = new Versao();
+        versaoAtual.setData(Calendar.getInstance());
+        versaoAtual.setMetricas(metricas);
+        versaoAtual.setNivel(EnumNivelDoProjeto.SATISFATORIO);
+        versaoAtual.setResultadoDaEquacao(88);
+        Versao versaoAnterior = new Versao();
+
+        Projeto projeto = new Projeto();
+        projeto.setId("id_projeto_666");
+        projeto.setConfiguracao(config);
+        projeto.setGerenteDeProjeto(gerenteDeProjeto);
+        projeto.setStatusDoProjeto(EnumStatusDoProjeto.MELHOROU);
+        projeto.setVersaoAtual(versaoAtual);
 
 
         JAXBContext jaxbCtx = null;
-
         StringWriter xmlWriter = null;
+
+
         try {
             //XML Binding code using JAXB
 
-            File file = new File("C:\\marshal.xml");
-            jaxbCtx = JAXBContext.newInstance(projeto2XML.class);
+            File file = new File("projeto.xml");
+
+            jaxbCtx = JAXBContext.newInstance(Projeto.class);
 
             xmlWriter = new StringWriter();
             Marshaller jaxbMarshaller = jaxbCtx.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
 
-            jaxbCtx.createMarshaller().marshal(p2xml, file);
-            jaxbCtx.createMarshaller().marshal(p2xml, xmlWriter);
+            jaxbCtx.createMarshaller().marshal(projeto, file);
+            jaxbCtx.createMarshaller().marshal(projeto, xmlWriter);
 
             System.out.println("XML Marshal example in Java");
             System.out.println(xmlWriter);
 
-            projeto2XML xmlout = (projeto2XML) jaxbCtx.createUnmarshaller().unmarshal(
+            Projeto xmlout = (Projeto) jaxbCtx.createUnmarshaller().unmarshal(
                     new StringReader(xmlWriter.toString()));
             System.out.println("XML Unmarshal example in JAva");
             System.out.println(xmlout.toString());
 
-            jaxbMarshaller.marshal(p2xml, file);
+            jaxbMarshaller.marshal(projeto, file);
+
 
         } catch (JAXBException ex) {
             Logger.getLogger(xmlBindJAXB.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
     }
-}
 
-
-@XmlRootElement(name = "projeto")
-@XmlAccessorType(XmlAccessType.FIELD)
-class projeto2XML {
-    @XmlElement(name = "GerenteDeProjeto")
-    private String GerenteDeProjeto;
-
-    @XmlElement(name = "statusDoProjeto")
-    private String statusDoProjeto;
-
-    @XmlElement(name = "versaoAtual")
-    private double versaoAtual;
-
-    @XmlElement(name = "versaoAnterior")
-    private double versaoAnterior;
-
-    @XmlElement(name = "startDate")
-    private Date startDate;
-
-    @XmlElement(name = "endDate")
-    private Date endDate;
-
-    @XmlElement(name = "configuracao")
-    private String configuracao;
-
-
-    public projeto2XML() {
-    }
-
-
-    public projeto2XML(String GerenteDeProjeto, String statusDoProjeto, Date startDate, Date endDate, String configuracao) {
-        this.GerenteDeProjeto = GerenteDeProjeto;
-        this.statusDoProjeto = statusDoProjeto;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.configuracao = configuracao;
-    }
-
-    public String getConfiguracao() {
-        return configuracao;
-    }
-
-    public void setConfiguracao(String configuracao) {
-        this.configuracao = configuracao;
-    }
-
-    public String getStatusDoProjeto() {
-        return statusDoProjeto;
-    }
-
-    public void setStatusDoProjeto(String statusDoProjeto) {
-        this.statusDoProjeto = statusDoProjeto;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getGerenteDeProjeto() {
-        return GerenteDeProjeto;
-    }
-
-    public void setGerenteDeProjeto(String gerenteDeProjeto) {
-        this.GerenteDeProjeto = gerenteDeProjeto;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    @Override
-    public String toString() {
-        return "projeto{" + "GerenteDeProjeto=" + GerenteDeProjeto + ", statusDoProjeto=" + statusDoProjeto + ", startDate=" + startDate + ", endDate=" + endDate + ", configuracao=" + configuracao + '}';
-
-    }
-
-    public double getVersaoAtual() {
-        return versaoAtual;
-    }
-
-    public void setVersaoAtual(double versaoAtual) {
-        this.versaoAtual = versaoAtual;
-    }
-
-    public double getVersaoAnterior() {
-        return versaoAnterior;
-    }
-
-    public void setVersaoAnterior(double versaoAnterior) {
-        this.versaoAnterior = versaoAnterior;
+    public String getClassPath() {
+        return this.getClass().getSimpleName();
     }
 }
+
+
+

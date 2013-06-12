@@ -4,13 +4,14 @@
  */
 package br.ufg.inf.visproj.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 import java.util.Map;
 
 /**
- *
  * @author ArturPascualote
  */
+@XmlRootElement
 public class Versao {
     private Calendar data;
     private float resultadoDaEquacao;
@@ -18,9 +19,9 @@ public class Versao {
     private EnumNivelDoProjeto nivel;
 
     public Versao() {
-        
+
         this.nivel = EnumNivelDoProjeto.NENHUM;
-        
+
     }
 
     public Calendar getData() {
@@ -54,7 +55,6 @@ public class Versao {
     public void setResultadoDaEquacao(int resultadoDaEquacao) {
         this.resultadoDaEquacao = resultadoDaEquacao;
     }
-    
-    
-    
+
+
 }
