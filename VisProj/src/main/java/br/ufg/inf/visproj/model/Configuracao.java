@@ -4,11 +4,13 @@
  */
 package br.ufg.inf.visproj.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 /**
  * @author ArturPascualote
  */
+@XmlRootElement
 public class Configuracao {
 
     private String equacao;

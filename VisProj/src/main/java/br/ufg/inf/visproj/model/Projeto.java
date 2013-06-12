@@ -4,9 +4,12 @@
  */
 package br.ufg.inf.visproj.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * @author ArturPascualote
  */
+@XmlRootElement
 public class Projeto {
 
     private GerenteDeProjeto gerenteDeProjeto;
@@ -18,6 +21,14 @@ public class Projeto {
 
     public Projeto() {
         this.statusDoProjeto = EnumStatusDoProjeto.SEM_ALTERACOES;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Configuracao getConfiguracao() {
@@ -58,14 +69,6 @@ public class Projeto {
 
     public void setVersaoAtual(Versao versaoAtual) {
         this.versaoAtual = versaoAtual;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
 

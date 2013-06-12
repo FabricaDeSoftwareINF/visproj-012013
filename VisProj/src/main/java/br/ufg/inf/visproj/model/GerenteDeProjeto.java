@@ -4,12 +4,14 @@
  */
 package br.ufg.inf.visproj.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
- *
  * @author ArturPascualote
  */
+@XmlRootElement
 public class GerenteDeProjeto {
-    
+
     private String nome;
     private String email;
 
@@ -31,6 +33,6 @@ public class GerenteDeProjeto {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    
+
+
 }

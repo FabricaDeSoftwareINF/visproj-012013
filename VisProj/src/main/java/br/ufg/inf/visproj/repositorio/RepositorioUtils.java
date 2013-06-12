@@ -1,20 +1,8 @@
 package br.ufg.inf.visproj.repositorio;
 
 
-import br.ufg.inf.visproj.model.Projeto;
-import org.jdom2.Attribute;
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.JDOMException;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
-
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
+import java.net.URL;
 
 /**
  * Created by IntelliJ IDEA.
@@ -27,7 +15,7 @@ import java.util.List;
  */
 
 
-public class PackOut {
+public class RepositorioUtils {
 
     private File diretorio;
     private File arquivo;
@@ -41,8 +29,7 @@ public class PackOut {
         return false;  //To change body of created methods use File | Settings | File Templates.
     }
 
-    boolean consultaArquivo(File diretorio, File arquivo) {
-
+    boolean validaDiretorio() {
 
         if (!diretorio.equals(arquivo.getAbsolutePath())) {
             System.out.println("o Arquivo informado não pertence a este diretorio.");
@@ -60,8 +47,39 @@ public class PackOut {
 
     }
 
+    public String coletaClasseDiretorio(String classe) {
 
-    boolean projeto2XML(Projeto projeto) {
+        String PROGRAM_DIRECTORY;
+        classe = classe + ".class";
+        try {
+            //Attempt to get the path of the actual JAR file, because the working directory is frequently not where the file is.
+            //Example: file:/D:/all/Java/TitanWaterworks/TitanWaterworks-en.jar!/TitanWaterworks.class
+            //Another example: /D:/all/Java/TitanWaterworks/TitanWaterworks.class
+            PROGRAM_DIRECTORY = getClass().getClassLoader().getResource(classe).getPath(); // Gets the path of the class or jar.
+
+            //Find the last ! and cut it off at that location. If this isn't being run from a jar, there is no !, so it'll cause an exception, which is fine.
+            try {
+                PROGRAM_DIRECTORY = PROGRAM_DIRECTORY.substring(0, PROGRAM_DIRECTORY.lastIndexOf('!'));
+            } catch (Exception e) {
+            }
+
+            //Find the last / and cut it off at that location.
+            PROGRAM_DIRECTORY = PROGRAM_DIRECTORY.substring(0, PROGRAM_DIRECTORY.lastIndexOf('/') + 1);
+            //If it starts with /, cut it off.
+            if (PROGRAM_DIRECTORY.startsWith("/"))
+                PROGRAM_DIRECTORY = PROGRAM_DIRECTORY.substring(1, PROGRAM_DIRECTORY.length());
+            //If it starts with file:/, cut that off, too.
+            if (PROGRAM_DIRECTORY.startsWith("file:/"))
+                PROGRAM_DIRECTORY = PROGRAM_DIRECTORY.substring(6, PROGRAM_DIRECTORY.length());
+        } catch (Exception e) {
+            PROGRAM_DIRECTORY = ""; //Current working directory instead.
+        }
+
+        return PROGRAM_DIRECTORY;
+    }
+
+
+    /*boolean projeto2XML(Projeto projeto) {
 
         projeto.getId();
         projeto.getGerenteDeProjeto();
@@ -146,102 +164,27 @@ public class PackOut {
         }
 
 
-    }
+    }*/
 
 
     String coletaUltimoIdProjeto() {
         String retorno = null;
-        File dados = new File("c://arquivo.xml");
-        SAXBuilder sb = new SAXBuilder();
-        Document projetoReader = null;
-        try {
-            projetoReader = sb.build(dados);
-        } catch (JDOMException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+
+        URL url = Repositorio.class.getResource("resources/");
+        if (url == null) {
+            System.err.println("Diretorio de Resources não encontrado.");
+        } else {
+            File dir = new File(String.valueOf(url));
+            for (File nextFile : dir.listFiles()) {
+                nextFile.getName();
+            }
         }
-        Element projeto = projetoReader.getRootElement();
-
-        List elements = projeto.getChildren();
-
-        Iterator i = elements.iterator();
-
-        //Iteramos com os elementos filhos, e filhos dos filhos
-        while (i.hasNext()) {
-            Element element = (Element) i.next();
-            retorno = "ID: " + projeto.getAttributeValue("id");
-        }
-
 
         return retorno;
+
     }
 
 
-    Projeto xml2Projeto(Integer id) {
-        Projeto projeto = null;
-        File dados = new File("c://arquivo.xml");
-        SAXBuilder sb = new SAXBuilder();
-        Document projetoReader = null;
-        try {
-            projetoReader = sb.build(dados);
-        } catch (JDOMException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-        Element elementoProjeto = projetoReader.getRootElement();
-
-        List elements = elementoProjeto.getChildren();
-
-        Iterator i = elements.iterator();
-
-        //Iteramos com os elementos filhos, e filhos dos filhos
-        while (i.hasNext()) {
-            Element element = (Element) i.next();
-            projeto.setId(elementoProjeto.getAttributeValue("id"));
-        }
-
-
-        return projeto;
-    }
-
-
-    private class arquivoDir {
-        private String diretorio;
-        private String arquivo;
-        private String idProjeto;
-
-        private arquivoDir(String diretorio, String arquivo, String idProjeto) {
-            this.diretorio = diretorio;
-            this.arquivo = arquivo;
-            this.idProjeto = idProjeto;
-        }
-
-        public String getDiretorio() {
-            return diretorio;
-        }
-
-        public void setDiretorio(String diretorio) {
-            this.diretorio = diretorio;
-        }
-
-        public String getArquivo() {
-            return arquivo;
-        }
-
-        public void setArquivo(String arquivo) {
-            this.arquivo = arquivo;
-        }
-
-        public String getIdProjeto() {
-            return idProjeto;
-        }
-
-        public void setIdProjeto(String idProjeto) {
-            this.idProjeto = idProjeto;
-        }
-    }
 }
 
 
