@@ -78,17 +78,17 @@ public class Projeto {
         if (obj == null) {
             return false; //nenhum objeto pode ser igual a null
         }
-        if (!(obj instanceof Projeto)) { //um projeto s√≥ pode ser igual a outro projeto
+        if (!(obj instanceof Projeto)) { //um projeto sÛ pode ser igual a outro projeto
             return false;
         }
 
         final Projeto outroProjeto = (Projeto) obj;
 
-        if (getId() == null) //se n√£o houver Id n√£o h√° como testar os dois projetos
+        if (getId() == null) //se n„o houver Id n„o h· como testar os dois projetos
         {
             return false;
         }
-        return getId().equals(outroProjeto.getId()); //dois projetos ser√£o iguais se seus Id's forem iguais
+        return getId().equals(outroProjeto.getId()); //dois projetos ser„o iguais se seus Id's forem iguais
     }
 
 }
