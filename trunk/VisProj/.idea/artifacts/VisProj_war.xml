@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="VisProj:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="visproj-0.0.1.war">
+      <element id="artifact" artifact-name="VisProj:war exploded" />
+    </root>
+  </artifact>
+</component>
