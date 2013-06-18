@@ -52,7 +52,7 @@ public class Versao {
         return resultadoDaEquacao;
     }
 
-    public void setResultadoDaEquacao(int resultadoDaEquacao) {
+    public void setResultadoDaEquacao(Float resultadoDaEquacao) {
         this.resultadoDaEquacao = resultadoDaEquacao;
     }
 

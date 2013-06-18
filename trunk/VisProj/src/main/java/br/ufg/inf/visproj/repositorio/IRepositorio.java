@@ -3,6 +3,8 @@ package br.ufg.inf.visproj.repositorio;
 import br.ufg.inf.visproj.model.Configuracao;
 import br.ufg.inf.visproj.model.Projeto;
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,15 +19,15 @@ import java.util.List;
 
 public interface IRepositorio {
 
-    Projeto consultarProjeto(String id);
+    Projeto consultarProjeto(String id) throws JAXBException;
 
-    Configuracao consultarConfiguracao(String idProjeto);
+    Configuracao consultarConfiguracao(String idProjeto) throws JAXBException;
 
-    void salvarOuAtualizarProjeto(Projeto projeto);
+    boolean salvarOuAtualizarProjeto(Projeto projeto) throws IOException;
 
-    List<Projeto> consultarListaProjetos();
+    List<Projeto> consultarListaProjetos() throws JAXBException;
 
-    void excluirProjeto(String id);
+    boolean excluirProjeto(String id) throws JAXBException;
 
-    void limpaDiretorio();
+    boolean limpaDiretorio();
 }
