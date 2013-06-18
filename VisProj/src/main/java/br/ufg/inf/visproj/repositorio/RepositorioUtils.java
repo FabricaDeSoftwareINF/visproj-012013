@@ -1,8 +1,18 @@
 package br.ufg.inf.visproj.repositorio;
 
 
+import br.ufg.inf.visproj.model.Projeto;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -17,26 +27,90 @@ import java.net.URL;
 
 public class RepositorioUtils {
 
-    private File diretorio;
+    private final boolean DIRETORIO_CRIADO;
+    private final String PATH = "Projetos";
     private File arquivo;
 
+    public RepositorioUtils() {
+        this.DIRETORIO_CRIADO = new File(PATH).mkdir();
 
-    private boolean diretorioExiste(File diretorio) {
-        if (diretorio.exists()) {
-            System.out.println("Diretório existe!");
+    }
+
+    public boolean salvarArquivo(Projeto projeto) throws IOException {
+        JAXBContext jaxbCtx = null;
+        StringWriter xmlWriter = null;
+        Marshaller jaxbMarshaller = null;
+
+        try {
+
+            File file = new File(PATH + "\\" + projeto.getId() + ".xml");
+
+            jaxbCtx = JAXBContext.newInstance(Projeto.class);
+
+            //xmlWriter = new StringWriter();
+            jaxbMarshaller = jaxbCtx.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+            jaxbMarshaller.marshal(projeto, file);
+
+
+            if (arquivo == null || !arquivo.isFile()) {
+                return false;
+            }
+
+
+            return true;
+        } catch (JAXBException ex) {
+            Logger.getLogger(RepositorioUtils.class.getName()).log(Level.SEVERE,
+                    null, ex);
+
+
+        }
+
+        return false;
+
+    }
+
+    private boolean excluirArquivo(Projeto projeto) throws JAXBException {
+        JAXBContext jaxbCtx = null;
+        StringWriter xmlWriter = null;
+        jaxbCtx = JAXBContext.newInstance(Projeto.class);
+
+        jaxbCtx.createMarshaller().marshal(projeto, xmlWriter);
+
+        File file = new File(PATH + "\\" + projeto.getId() + ".xml");
+
+        if (file.exists()) {
+            file.delete();
+
             return true;
         }
-        return false;  //To change body of created methods use File | Settings | File Templates.
+
+        Projeto xmlout = (Projeto) jaxbCtx.createUnmarshaller().unmarshal(new StringReader(xmlWriter.toString()));
+
+        return false;
+    }
+
+    private boolean limpaDiretorio() {
+        File file = new File(PATH);
+
+        if (file.exists() && file.isDirectory()) {
+            file.delete();
+
+            return true;
+        }
+
+        return false;
     }
 
     boolean validaDiretorio() {
 
-        if (!diretorio.equals(arquivo.getAbsolutePath())) {
-            System.out.println("o Arquivo informado não pertence a este diretorio.");
+        if (!DIRETORIO_CRIADO) {
+            System.out.println("o Arquivo informado não pertence a este DIRETORIO_CRIADO.");
             return false;
         }
 
-        if (diretorioExiste(this.diretorio)) {
+        if (this.DIRETORIO_CRIADO) {
             if (arquivo.exists()) {
                 System.out.println("Diretório existe!");
                 return true;
