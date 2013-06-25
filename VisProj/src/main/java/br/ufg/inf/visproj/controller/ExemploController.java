@@ -42,20 +42,21 @@ public class ExemploController {
 		gerente.setNome("joão da silva");
 		gerente.setEmail("email");
 		result.include("variable", "VRaptor!");
+		System.out.println(Results.representation());
 		result.use(Results.representation()).from(gerente).serialize();
 	}
 	
 	
 	@Post("/upload/file")
-	public void atualizarFoto(Nivel nivel) {
+	public void atualizarFoto(UploadedFile file) {
 		//System.out.println("AKI MSM" + "    " + file);
-		//final boolean arquivoValido = file != null && file.getContentType().startsWith("image");
-		//validator.checking(new Validations(){
-			//{				
-			//	that(arquivoValido,"erro", "arquivo.invalido");				
-			//}
-		//});
-		System.out.println(nivel.getValorFinal());
+		final boolean arquivoValido = file != null && file.getContentType().startsWith("image");
+		validator.checking(new Validations(){
+			{				
+				that(arquivoValido,"erro", "arquivo.invalido");				
+			}
+		});
+		System.out.println(file.getFileName());
 		validator.onErrorRedirectTo(ExemploController.class).index();
 		result.use(Results.representation()).from("teste").serialize();
 		//try {			

@@ -22,10 +22,36 @@ public class Configuracao {
 
 
     public Configuracao() {
-
     }
 
-    public String getEquacao() {
+    /**
+	 * @param equacao
+	 * @param metricas
+	 * @param nivelInsatisfatorio
+	 * @param nivelPoucoSatisfatorio
+	 * @param nivelSatisfatorio
+	 * @param id
+	 */
+	public Configuracao(String equacao, Set<String> metricas,
+			Nivel nivelInsatisfatorio, Nivel nivelPoucoSatisfatorio,
+			Nivel nivelSatisfatorio, String id) {
+		this.equacao = equacao;
+		this.metricas = metricas;
+		this.nivelInsatisfatorio = nivelInsatisfatorio;
+		this.nivelPoucoSatisfatorio = nivelPoucoSatisfatorio;
+		this.nivelSatisfatorio = nivelSatisfatorio;
+		this.id = id;
+	}
+
+	public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
+	public String getEquacao() {
         return equacao;
     }
 
@@ -63,15 +89,7 @@ public class Configuracao {
 
     public void setNivelSatisfatorio(Nivel nivelSatisfatorio) {
         this.nivelSatisfatorio = nivelSatisfatorio;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    }   
 
     @Override
     public boolean equals(Object obj) {

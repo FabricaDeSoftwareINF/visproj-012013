@@ -18,11 +18,22 @@ public class Nivel {
 
 
     public Nivel() {
+    }   
+
+    /**
+	 * @param valorInicial
+	 * @param valorFinal
+	 * @param melhorQuandoMaior
+	 */
+	public Nivel(float valorInicial, float valorFinal, boolean melhorQuandoMaior) {
+		this.valorInicial = valorInicial;
+		this.valorFinal = valorFinal;
+		this.melhorQuandoMaior = melhorQuandoMaior;
+	}
 
 
-    }
 
-    public boolean isMelhorQuandoMaior() {
+	public boolean isMelhorQuandoMaior() {
         return melhorQuandoMaior;
     }
 

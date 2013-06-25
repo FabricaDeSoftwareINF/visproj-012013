@@ -21,9 +21,28 @@ public class Projeto {
 
     public Projeto() {
         this.statusDoProjeto = EnumStatusDoProjeto.SEM_ALTERACOES;
-    }
+    }   
 
-    public String getId() {
+    /**
+	 * @param gerenteDeProjeto
+	 * @param statusDoProjeto
+	 * @param versaoAnterior
+	 * @param versaoAtual
+	 * @param configuracao
+	 * @param id
+	 */
+	public Projeto(GerenteDeProjeto gerenteDeProjeto,
+			EnumStatusDoProjeto statusDoProjeto, Versao versaoAnterior,
+			Versao versaoAtual, Configuracao configuracao, String id) {
+		this.gerenteDeProjeto = gerenteDeProjeto;
+		this.statusDoProjeto = statusDoProjeto;
+		this.versaoAnterior = versaoAnterior;
+		this.versaoAtual = versaoAtual;
+		this.configuracao = configuracao;
+		this.id = id;
+	}
+
+	public String getId() {
         return id;
     }
 
@@ -78,17 +97,17 @@ public class Projeto {
         if (obj == null) {
             return false; //nenhum objeto pode ser igual a null
         }
-        if (!(obj instanceof Projeto)) { //um projeto só pode ser igual a outro projeto
+        if (!(obj instanceof Projeto)) { //um projeto sï¿½ pode ser igual a outro projeto
             return false;
         }
 
         final Projeto outroProjeto = (Projeto) obj;
 
-        if (getId() == null) //se não houver Id não há como testar os dois projetos
+        if (getId() == null) //se nï¿½o houver Id nï¿½o hï¿½ como testar os dois projetos
         {
             return false;
         }
-        return getId().equals(outroProjeto.getId()); //dois projetos serão iguais se seus Id's forem iguais
+        return getId().equals(outroProjeto.getId()); //dois projetos serï¿½o iguais se seus Id's forem iguais
     }
 
 }
