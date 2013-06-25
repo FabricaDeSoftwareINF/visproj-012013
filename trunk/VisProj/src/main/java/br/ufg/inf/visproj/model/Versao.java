@@ -19,12 +19,24 @@ public class Versao {
     private EnumNivelDoProjeto nivel;
 
     public Versao() {
-
         this.nivel = EnumNivelDoProjeto.NENHUM;
+    }   
 
-    }
+    /**
+	 * @param data
+	 * @param resultadoDaEquacao
+	 * @param metricas
+	 * @param nivel
+	 */
+	public Versao(Calendar data, float resultadoDaEquacao,
+			Map<String, Float> metricas, EnumNivelDoProjeto nivel) {
+		this.data = data;
+		this.resultadoDaEquacao = resultadoDaEquacao;
+		this.metricas = metricas;
+		this.nivel = nivel;
+	}
 
-    public Calendar getData() {
+	public Calendar getData() {
         return data;
     }
 
