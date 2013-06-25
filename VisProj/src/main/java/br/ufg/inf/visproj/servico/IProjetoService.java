@@ -12,10 +12,6 @@ import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
-/**
- *
- * @author ArturPascualote
- */
 public interface IProjetoService {
     
     public void salvarProjeto(Projeto projeto) throws IOException, JAXBException;
