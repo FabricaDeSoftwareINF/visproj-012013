@@ -22,9 +22,9 @@
 			    <version>2.5.2</version>
 			    <configuration>
 			        <instrumentation>
-			    <ignores>
-			      <ignore>br.ufg.inf.visproj.controller.*</ignore>
-			    </ignores>
+			    <excludes>
+	              <exclude>br.ufg.inf.visproj.controller/*.class</exclude>
+	            </excludes>
 			  </instrumentation>
 			    </configuration>
 			</plugin>
