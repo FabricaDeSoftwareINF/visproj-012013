@@ -23,7 +23,7 @@
 			    <configuration>
 			        <instrumentation>
 			    <excludes>
-	              <exclude>br.ufg.inf.visproj.controller/*.class</exclude>
+	              <exclude>br/ufg/inf/visproj/controller/*.class</exclude>
 	            </excludes>
 			  </instrumentation>
 			    </configuration>
