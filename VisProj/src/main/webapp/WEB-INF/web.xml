@@ -5,7 +5,9 @@
     <filter-name>vraptor</filter-name>			
     <filter-class>br.com.caelum.vraptor.VRaptor</filter-class>
   </filter>
-
+<welcome-file-list>      
+    <welcome-file>inicial.jsp</welcome-file>
+</welcome-file-list>
 	<filter-mapping>
 	    <filter-name>vraptor</filter-name>
 	    <url-pattern>/*</url-pattern>
