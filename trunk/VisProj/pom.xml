@@ -30,22 +30,22 @@
                 </execution>
                 <execution>
                     <id>instrument</id>
-                    <phase>site</phase>
- 
+                    <phase>site</phase> 
                     <goals>
                         <goal>instrument</goal>
                         <goal>cobertura</goal>
                     </goals>
+                    <configuration>
+				        <instrumentation>
+						    <excludes>
+				              <exclude>br/ufg/inf/visproj/controller/*.class</exclude>
+				              <exclude>br/ufg/inf/visproj/controller/*.java</exclude>
+				            </excludes>
+				  	     </instrumentation>
+			          </configuration>
                 </execution>
             </executions>
-			    <configuration>
-			        <instrumentation>
-			    <excludes>
-	              <exclude>br/ufg/inf/visproj/controller/*.class</exclude>
-	              <exclude>br/ufg/inf/visproj/controller/*.java</exclude>
-	            </excludes>
-			  </instrumentation>
-			    </configuration>
+			    
 			</plugin>
         </plugins>        
     </build>
