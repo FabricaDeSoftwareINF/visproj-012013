@@ -21,28 +21,28 @@ public class Projeto {
 
     public Projeto() {
         this.statusDoProjeto = EnumStatusDoProjeto.SEM_ALTERACOES;
-    }   
+    }
 
     /**
-	 * @param gerenteDeProjeto
-	 * @param statusDoProjeto
-	 * @param versaoAnterior
-	 * @param versaoAtual
-	 * @param configuracao
-	 * @param id
-	 */
-	public Projeto(GerenteDeProjeto gerenteDeProjeto,
-			EnumStatusDoProjeto statusDoProjeto, Versao versaoAnterior,
-			Versao versaoAtual, Configuracao configuracao, String id) {
-		this.gerenteDeProjeto = gerenteDeProjeto;
-		this.statusDoProjeto = statusDoProjeto;
-		this.versaoAnterior = versaoAnterior;
-		this.versaoAtual = versaoAtual;
-		this.configuracao = configuracao;
-		this.id = id;
-	}
+     * @param gerenteDeProjeto
+     * @param statusDoProjeto
+     * @param versaoAnterior
+     * @param versaoAtual
+     * @param configuracao
+     * @param id
+     */
+    public Projeto(GerenteDeProjeto gerenteDeProjeto,
+            EnumStatusDoProjeto statusDoProjeto, Versao versaoAnterior,
+            Versao versaoAtual, Configuracao configuracao, String id) {
+        this.gerenteDeProjeto = gerenteDeProjeto;
+        this.statusDoProjeto = statusDoProjeto;
+        this.versaoAnterior = versaoAnterior;
+        this.versaoAtual = versaoAtual;
+        this.configuracao = configuracao;
+        this.id = id;
+    }
 
-	public String getId() {
+    public String getId() {
         return id;
     }
 
@@ -90,24 +90,27 @@ public class Projeto {
         this.versaoAtual = versaoAtual;
     }
 
-
     @Override
     public boolean equals(Object obj) {
 
+        //nenhum objeto pode ser igual a null
         if (obj == null) {
-            return false; //nenhum objeto pode ser igual a null
+            return false; 
         }
-        if (!(obj instanceof Projeto)) { //um projeto s� pode ser igual a outro projeto
+        //um projeto ser pode ser igual a outro projeto
+        if (!(obj instanceof Projeto)) { 
             return false;
         }
 
         final Projeto outroProjeto = (Projeto) obj;
 
-        if (getId() == null) //se n�o houver Id n�o h� como testar os dois projetos
+        //se nao houver Id nao ha como testar os dois projetos
+        if (getId() == null) 
         {
             return false;
         }
-        return getId().equals(outroProjeto.getId()); //dois projetos ser�o iguais se seus Id's forem iguais
+        
+        //dois projetos serao iguais se seus Id's forem iguais
+        return getId().equals(outroProjeto.getId()); 
     }
-
 }
