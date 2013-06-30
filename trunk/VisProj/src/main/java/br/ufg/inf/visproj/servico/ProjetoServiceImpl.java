@@ -82,10 +82,11 @@ public class ProjetoServiceImpl implements IProjetoService{
      * salvarConfiguracao   - 	Salva ou atualiza a configuração para determinado projeto.
      * @param projeto			O projeto contendo a configuracao a ser salvo ou atualizado.
      * @throws IOException		Se houver falha para salvar o arquivo.
+     * @throws JAXBException 
      * @see Projeto
      */
     @Override
-    public void salvarConfiguracao(Projeto projeto) throws IOException {
+    public void salvarConfiguracao(Projeto projeto) throws IOException, JAXBException {
         repositorio.salvarOuAtualizarProjeto(projeto);
     }
 

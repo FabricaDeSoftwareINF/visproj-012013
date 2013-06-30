@@ -30,7 +30,7 @@ public class TestesRepositorio {
     private static Projeto projeto;
 
     @BeforeClass //construtor devera ser vinculado ao @BeforeClass dentro do junit.
-    public static void beforeClass() throws IOException {
+    public static void beforeClass() throws IOException, JAXBException {
         repositorio = new Repositorio();
         repositorio.criaDiretorio();
         repositorio.limpaDiretorio();

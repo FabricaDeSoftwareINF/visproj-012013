@@ -92,33 +92,19 @@ public class Repositorio implements IRepositorio {
      * @return						<code>true</code> se o projeto foi salvo ou atualizado ou
      * 								<code>false</code> caso contrário.
      * @throws IOException			Se houver problema para gravar o arquivo.
+     * @throws JAXBException 
      * @see Projeto
      * @since 1.0
      */   
-    public boolean salvarOuAtualizarProjeto(Projeto projeto) throws IOException {
-        JAXBContext jaxbCtx = null;
-        Marshaller jaxbMarshaller = null;
+    public boolean salvarOuAtualizarProjeto(Projeto projeto) throws IOException, JAXBException {
 
         if (projeto.getId() == null || projeto.getId().isEmpty()) {
             return false;
-        }
-        try {
+        }       
 
-            File file = new File(getPathCompleto(projeto.getId()));
-
-            jaxbCtx = JAXBContext.newInstance(Projeto.class);
-            jaxbMarshaller = jaxbCtx.createMarshaller();
-            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-            jaxbMarshaller.marshal(projeto, file);
-
-            return true;
-        } catch (JAXBException ex) {
-            Logger.getLogger(Repositorio.class.getName()).log(Level.SEVERE,
-                    null, ex);
-
-            return false;
-        }
+        ConvertaObjetoParaArquivo(projeto); 
+        
+        return true;        
     }
 
     /**
@@ -136,14 +122,11 @@ public class Repositorio implements IRepositorio {
         List<Projeto> listaDeProjetos = new ArrayList<>();
         if (files != null && files.length >0) {
             for (int i = 0; i < files.length; i++) {
-
-                Projeto projetoConsultado = ConvertaArquivoParaObjeto(files[i]);
-                listaDeProjetos.add(projetoConsultado);
+                listaDeProjetos.add(ConvertaArquivoParaObjeto(files[i]));
             }
         }
         
         return listaDeProjetos;
-
     }
 
     /**
@@ -215,5 +198,16 @@ public class Repositorio implements IRepositorio {
     	JAXBContext jaxbCtx = null;
         jaxbCtx = JAXBContext.newInstance(Projeto.class);
         return (Projeto) jaxbCtx.createUnmarshaller().unmarshal(file);
+    }
+    
+    private void ConvertaObjetoParaArquivo(Projeto projeto) throws JAXBException{
+    	File file = new File(getPathCompleto(projeto.getId()));
+    	JAXBContext jaxbCtx = null;
+        Marshaller jaxbMarshaller = null;
+        jaxbCtx = JAXBContext.newInstance(Projeto.class);
+        jaxbMarshaller = jaxbCtx.createMarshaller();
+        jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        jaxbMarshaller.marshal(projeto, file);
     }
 }
