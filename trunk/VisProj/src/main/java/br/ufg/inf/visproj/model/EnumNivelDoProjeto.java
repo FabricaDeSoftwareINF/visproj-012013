@@ -35,9 +35,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public enum EnumNivelDoProjeto {
 
+	/**
+	 * O nível nenhum.
+	 */
     NENHUM("Nenhum"),
+    
+    /**
+     * O nível satisfatório.
+     */
     SATISFATORIO("Satisfatório"),
+    
+    /**
+     * O nível pouco satisfatório.
+     */
     POUCO_SATISFATORIO("Pouco satisfatório"),
+    
+    /**
+     * O nível insatisfatório.
+     */
     INSATISFATORIO("Insatisfatório");
 
 

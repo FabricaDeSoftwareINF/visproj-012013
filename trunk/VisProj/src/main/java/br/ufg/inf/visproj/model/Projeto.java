@@ -42,6 +42,9 @@ public class Projeto {
     private Configuracao configuracao;
     private String id;
 
+    /**
+     * Inicia instância dessa classe com status <code>EnumStatusDoProjeto.SEM_ALTERACOES</code>.
+     */
     public Projeto() {
         this.statusDoProjeto = EnumStatusDoProjeto.SEM_ALTERACOES;
     }

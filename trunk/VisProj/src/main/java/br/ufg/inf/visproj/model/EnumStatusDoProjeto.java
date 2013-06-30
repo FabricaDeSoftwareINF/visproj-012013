@@ -35,8 +35,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public enum EnumStatusDoProjeto {
 
+	/**
+	 * O status sem alterações.
+	 */
     SEM_ALTERACOES("Sem alterações"),
+    
+    /**
+     * O status piorou.
+     */
     PIOROU("Piorou"),
+    
+    /**
+     * O status melhorou.
+     */
     MELHOROU("Melhorou");
 
     private final String statusDoProjeto;
