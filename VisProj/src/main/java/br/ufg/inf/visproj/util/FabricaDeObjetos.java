@@ -44,6 +44,9 @@ public final class FabricaDeObjetos {
 	private static final boolean MELHORA_QUANDO_MAIOR = true;
 	private static final Float METRICA_COMPLEXIDADE = 20f;
 	
+	private FabricaDeObjetos(){		
+	}
+	
 	/**
 	 * criarProjeto  -	Cria um projeto padrão com o id informado.
 	 * @param id		O id do projeto.
