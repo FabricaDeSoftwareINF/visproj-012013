@@ -62,6 +62,10 @@ public enum EnumNivelDoProjeto {
         this.nivel = nivel;
     }
 
+    /**
+     * getNivel	Obtém o nível do projeto.
+     * @return	O nível do projeto.
+     */
     public String getNivel() {
         return this.nivel;
     }
