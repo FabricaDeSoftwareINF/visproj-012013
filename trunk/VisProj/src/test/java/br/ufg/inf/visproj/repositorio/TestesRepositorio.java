@@ -35,7 +35,7 @@ public class TestesRepositorio {
         repositorio = new Repositorio();
         repositorio.criaDiretorio();
         repositorio.limpaDiretorio();
-        projeto = FabricaDeObjetos.criarProjeto("X9");
+        projeto = FabricaDeObjetos.getInstancia().criarProjeto("X9");
         repositorio.salvarOuAtualizarProjeto(projeto);
     }
 
@@ -52,7 +52,7 @@ public class TestesRepositorio {
     @Test
     public void testaSalvarProjetoInexistente() throws IOException, JAXBException {
 
-        Projeto projeto = FabricaDeObjetos.criarProjeto("ProjetoX");
+        Projeto projeto = FabricaDeObjetos.getInstancia().criarProjeto("ProjetoX");
 
         repositorio.salvarOuAtualizarProjeto(projeto);
         Projeto projetoConsultado = repositorio.consultarProjeto(projeto.getId());
