@@ -49,6 +49,10 @@ public final class FabricaDeObjetos {
 	private FabricaDeObjetos(){		
 	}
 	
+	/**
+	 * getInstancia Obtem a instância da fabrica de objetos.
+	 * @return A única instância da fábrica de objetos.
+	 */
 	public static FabricaDeObjetos getInstancia(){
 		if(instancia == null){
 			instancia = new FabricaDeObjetos();
