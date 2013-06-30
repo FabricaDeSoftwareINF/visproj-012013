@@ -57,6 +57,12 @@ public class ProjetoServiceImpl implements IProjetoService{
     	this.repositorio = repositorio;
     }
 
+    /**
+	 * salvarProjeto		- 	calcula a equação e grava o projeto em um arquivo.
+	 * @param projeto			O projeto a ser gravado ou atualizado.
+	 * @throws IOException		Se houver falha para salvar o arquivo.
+	 * @throws JAXBException	Se houver falha na conversão para o arquivo xml.
+	 */
     @Override
     public void salvarProjeto(Projeto projeto) throws IOException, JAXBException {
     	Configuracao configuracao = repositorio.consultarConfiguracao(projeto.getId());
@@ -65,11 +71,24 @@ public class ProjetoServiceImpl implements IProjetoService{
         repositorio.salvarOuAtualizarProjeto(projeto);
     }
 
+    /**
+     * salvarConfiguracao   - 	Salva ou atualiza a configuração para determinado projeto.
+     * @param projeto			O projeto contendo a configuracao a ser salvo ou atualizado.
+     * @throws IOException		Se houver falha para salvar o arquivo.
+     * @see Projeto
+     */
     @Override
     public void salvarConfiguracao(Projeto projeto) throws IOException {
         repositorio.salvarOuAtualizarProjeto(projeto);
     }
 
+    /**
+     * getResultadoDoProjeto - 	Obtém o resultado do projeto pelo id.
+     * @param idDoProjeto		O id do projeto.
+     * @return 					O resultado do projeto.
+     * @throws JAXBException	Se houver falha na conversão do arquivo.
+     * @see ResultadoDoProjeto
+     */
     @Override
     public ResultadoDoProjeto getResultadoDoProjeto(String idDoProjeto) throws JAXBException {
         Projeto projeto = repositorio.consultarProjeto(idDoProjeto);
@@ -78,6 +97,12 @@ public class ProjetoServiceImpl implements IProjetoService{
         return resultado;
     }
 
+    /**
+     * getListaResultadoDosProjetos - 	Obtém a lista de resultado de todos os projetos.
+     * @return							A lista do resultado de todos os projetos.
+     * @throws JAXBException			Se houver falha na conversão do projeto.
+     * @see ResultadoDoProjeto
+     */
     @Override
     public List<ResultadoDoProjeto> getListaResultadoDosProjetos() throws JAXBException {
         List<ResultadoDoProjeto> listaDeResultados = new ArrayList<>();
@@ -91,6 +116,9 @@ public class ProjetoServiceImpl implements IProjetoService{
         return listaDeResultados;
     }
 
+    /**
+     * excluirTodosProjetos - Exclui todos os projetos incluindo o diretório.
+     */
     @Override
     public void excluirTodosProjetos() {
         repositorio.limpaDiretorio();

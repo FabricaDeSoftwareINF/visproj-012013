@@ -35,14 +35,42 @@ import javax.xml.bind.JAXBException;
  */ 
 public interface IProjetoService {
     
+	/**
+	 * salvarProjeto		- 	calcula a equação e grava o projeto em um arquivo.
+	 * @param projeto			O projeto a ser gravado ou atualizado.
+	 * @throws IOException		Se houver falha para salvar o arquivo.
+	 * @throws JAXBException	Se houver falha na conversão para o arquivo xml.
+	 */
     void salvarProjeto(Projeto projeto) throws IOException, JAXBException;
     
+    /**
+     * salvarConfiguracao   - 	Salva ou atualiza a configuração para determinado projeto.
+     * @param projeto			O projeto contendo a configuracao a ser salvo ou atualizado.
+     * @throws IOException		Se houver falha para salvar o arquivo.
+     * @see Projeto
+     */
     void salvarConfiguracao (Projeto projeto) throws IOException;
     
+    /**
+     * getResultadoDoProjeto - 	Obtém o resultado do projeto pelo id.
+     * @param idDoProjeto		O id do projeto.
+     * @return 					O resultado do projeto.
+     * @throws JAXBException	Se houver falha na conversão do arquivo.
+     * @see ResultadoDoProjeto
+     */
     ResultadoDoProjeto getResultadoDoProjeto(String idDoProjeto) throws JAXBException;
     
+    /**
+     * getListaResultadoDosProjetos - 	Obtém a lista de resultado de todos os projetos.
+     * @return							A lista do resultado de todos os projetos.
+     * @throws JAXBException			Se houver falha na conversão do projeto.
+     * @see ResultadoDoProjeto
+     */
     List<ResultadoDoProjeto> getListaResultadoDosProjetos() throws JAXBException;
     
+    /**
+     * excluirTodosProjetos - Exclui todos os projetos incluindo o diretório.
+     */
     void excluirTodosProjetos();
     
 }
