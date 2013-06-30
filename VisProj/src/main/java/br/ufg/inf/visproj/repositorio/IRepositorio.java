@@ -59,15 +59,17 @@ public interface IRepositorio {
      * @return						<code>true</code> se o projeto foi salvo ou atualizado ou
      * 								<code>false</code> caso contrário.
      * @throws IOException			Se houver problema para gravar o arquivo.
+     * @throws JAXBException 
      * @see Projeto
      * @since 1.0
      */    
-    boolean salvarOuAtualizarProjeto(Projeto projeto) throws IOException;
+    boolean salvarOuAtualizarProjeto(Projeto projeto) throws IOException, JAXBException;
 
     /**
      * consultarListaProjetos -	Consulta todos os projetos armazenados no diretório padrão.
      * @return 					A lista de projetos existentes.
      * @throws JAXBException	Se houver problema na conversão.
+     * @throws IOException	    Se houver problema para gravar o arquivo.
      * @see Projeto
      */
     List<Projeto> consultarListaProjetos() throws JAXBException;

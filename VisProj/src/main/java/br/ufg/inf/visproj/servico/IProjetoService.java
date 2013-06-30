@@ -47,9 +47,10 @@ public interface IProjetoService {
      * salvarConfiguracao   - 	Salva ou atualiza a configuração para determinado projeto.
      * @param projeto			O projeto contendo a configuracao a ser salvo ou atualizado.
      * @throws IOException		Se houver falha para salvar o arquivo.
+     * @throws JAXBException 	Se houver falha na conversão do arquivo.
      * @see Projeto
      */
-    void salvarConfiguracao (Projeto projeto) throws IOException;
+    void salvarConfiguracao (Projeto projeto) throws IOException, JAXBException;
     
     /**
      * getResultadoDoProjeto - 	Obtém o resultado do projeto pelo id.
