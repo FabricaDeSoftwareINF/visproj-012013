@@ -81,6 +81,11 @@ public interface IRepositorio {
     boolean excluirProjeto(String id) throws JAXBException;
 
     /**
+     * criaDiretorio - Cria o diretorio padrão para salvar os projetos.
+     */
+    void criaDiretorio();
+    
+    /**
      * limpaDiretorio 	- 	Limpa todos os arquivos armazenados no diretório padrão.
      * @return 				<code>true</code> caso o diretório foi limpo ou <code>false</code> caso contrário.
      */

@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class TestesRepositorio {
 
-    private static Repositorio repositorio;
+    private static IRepositorio repositorio;
     private static Projeto projeto;
 
     @BeforeClass //construtor devera ser vinculado ao @BeforeClass dentro do junit.

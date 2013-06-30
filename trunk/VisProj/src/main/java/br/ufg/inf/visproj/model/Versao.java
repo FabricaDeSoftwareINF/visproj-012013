@@ -46,10 +46,11 @@ public class Versao {
     }   
 
     /**
-	 * @param data
-	 * @param resultadoDaEquacao
-	 * @param metricas
-	 * @param nivel
+	 * @param data					A data da versão do projeto. 
+	 * @param resultadoDaEquacao	O resultado da equação desta versão.
+	 * @param metricas				As métricas desta versão do projeto.
+	 * @param nivel					O nível desta versão do projeto.
+	 * @see EnumNivelDoProjeto
 	 */
 	public Versao(Calendar data, float resultadoDaEquacao,
 			Map<String, Float> metricas, EnumNivelDoProjeto nivel) {

@@ -41,6 +41,11 @@ public class GerenteDeProjeto {
     public GerenteDeProjeto() {
     }    
     
+    /**
+     * 
+     * @param nome O nome do gerente.
+     * @param email O email do gerente.
+     */
     public GerenteDeProjeto(String nome, String email) {
 		super();
 		this.nome = nome;

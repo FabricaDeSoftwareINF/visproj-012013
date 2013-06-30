@@ -47,12 +47,16 @@ public class Projeto {
     }
 
     /**
-     * @param gerenteDeProjeto
-     * @param statusDoProjeto
-     * @param versaoAnterior
-     * @param versaoAtual
-     * @param configuracao
-     * @param id
+     * @param gerenteDeProjeto 	O gerente de projeto.
+     * @param statusDoProjeto	O status do projeto.
+     * @param versaoAnterior	A versão anterior do projeto.
+     * @param versaoAtual		A versão atual do projeto.
+     * @param configuracao		A configuracao do projeto.
+     * @param id				O id do projeto.
+     * @see GerenteDeProjeto
+     * @see EnumStatusDoProjeto
+     * @see Versao
+     * @see Configuracao
      */
     public Projeto(GerenteDeProjeto gerenteDeProjeto,
             EnumStatusDoProjeto statusDoProjeto, Versao versaoAnterior,
