@@ -134,9 +134,9 @@ public class Repositorio implements IRepositorio {
         File file = new File(PATH);
 
         File files[] = file.listFiles();
-
         
         List<Projeto> listaDeProjetos = new ArrayList<>();
+        Logger.getLogger("consultarProjetosExistentes").log(Level.SEVERE, "tamanhoArquivo", files.length);
         if (files != null && files.length >0) {
         	Unmarshaller jaxbMarshaller = null;
         	JAXBContext jaxbCtx = null;
