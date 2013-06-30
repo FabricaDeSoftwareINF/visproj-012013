@@ -26,14 +26,10 @@ import br.ufg.inf.visproj.model.Projeto;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Repositorio
@@ -63,7 +59,7 @@ public class Repositorio implements IRepositorio {
             return null;
         }
 
-        Projeto projetoConsultado = ConvertaArquivoParaObjeto(file);
+        Projeto projetoConsultado = convertaArquivoParaObjeto(file);
 
         return projetoConsultado;
     }
@@ -102,7 +98,7 @@ public class Repositorio implements IRepositorio {
             return false;
         }       
 
-        ConvertaObjetoParaArquivo(projeto); 
+        convertaObjetoParaArquivo(projeto); 
         
         return true;        
     }
@@ -122,7 +118,7 @@ public class Repositorio implements IRepositorio {
         List<Projeto> listaDeProjetos = new ArrayList<>();
         if (files != null && files.length >0) {
             for (int i = 0; i < files.length; i++) {
-                listaDeProjetos.add(ConvertaArquivoParaObjeto(files[i]));
+                listaDeProjetos.add(convertaArquivoParaObjeto(files[i]));
             }
         }
         
@@ -194,13 +190,13 @@ public class Repositorio implements IRepositorio {
         return PATH + "\\" + nomeArquivo + ".xml";
     }
     
-    private Projeto ConvertaArquivoParaObjeto(File file) throws JAXBException{
+    private Projeto convertaArquivoParaObjeto(File file) throws JAXBException{
     	JAXBContext jaxbCtx = null;
         jaxbCtx = JAXBContext.newInstance(Projeto.class);
         return (Projeto) jaxbCtx.createUnmarshaller().unmarshal(file);
     }
     
-    private void ConvertaObjetoParaArquivo(Projeto projeto) throws JAXBException{
+    private void convertaObjetoParaArquivo(Projeto projeto) throws JAXBException{
     	File file = new File(getPathCompleto(projeto.getId()));
     	JAXBContext jaxbCtx = null;
         Marshaller jaxbMarshaller = null;
