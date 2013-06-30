@@ -75,6 +75,18 @@ public class TestesRepositorio {
         Assert.assertNotNull(projetoConsultado);
         Assert.assertEquals(projeto.getConfiguracao().getEquacao(), projetoConsultado.getConfiguracao().getEquacao());
     }
+    
+    @Test
+    public void testaSalvarProjetoComIdNuloOuVazio() throws IOException, JAXBException{
+    	boolean projetoSalvo = repositorio.salvarOuAtualizarProjeto(new Projeto());
+    	Assert.assertFalse(projetoSalvo);
+    	
+    	Projeto projeto = new Projeto();
+    	projeto.setId("");
+    	
+    	projetoSalvo = repositorio.salvarOuAtualizarProjeto(new Projeto());
+    	Assert.assertFalse(projetoSalvo);
+    }
 
     @Test
     public void testaConsultarProjetoExistente() throws JAXBException
@@ -125,5 +137,11 @@ public class TestesRepositorio {
         if (listaProjetos.size() == 0) {
             repositorio.salvarOuAtualizarProjeto(this.projeto);
         }
+    }
+    
+    @Test
+    public void testaExcluirProjetoInexistente() throws JAXBException{
+    	boolean projetoExcluido = repositorio.excluirProjeto("projetoqualquer");
+    	Assert.assertFalse(projetoExcluido);
     }
 }
