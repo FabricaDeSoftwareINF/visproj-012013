@@ -26,6 +26,8 @@ import br.ufg.inf.visproj.model.Projeto;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -133,16 +135,20 @@ public class Repositorio implements IRepositorio {
 
         File files[] = file.listFiles();
 
-
+        
         List<Projeto> listaDeProjetos = new ArrayList<>();
-        if (files != null) {
+        if (files != null && files.length >0) {
+        	Unmarshaller jaxbMarshaller = null;
+        	JAXBContext jaxbCtx = null;
             for (int i = 0; i < files.length; i++) {
-                JAXBContext jaxbCtx = null;
+                
                 jaxbCtx = JAXBContext.newInstance(Projeto.class);
-                Projeto projetoConsultado = (Projeto) jaxbCtx.createUnmarshaller().unmarshal(file);
+                jaxbMarshaller = jaxbCtx.createUnmarshaller();
+                Projeto projetoConsultado = (Projeto) jaxbMarshaller.unmarshal(files[i]);
                 listaDeProjetos.add(projetoConsultado);
             }
         }
+        
         return listaDeProjetos;
 
     }

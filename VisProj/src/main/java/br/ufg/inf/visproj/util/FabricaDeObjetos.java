@@ -44,9 +44,6 @@ public final class FabricaDeObjetos {
 	private static final boolean MELHORA_QUANDO_MAIOR = true;
 	private static final Float METRICA_COMPLEXIDADE = 20f;
 	
-	private FabricaDeObjetos(){		
-	}
-	
 	/**
 	 * criarProjeto  -	Cria um projeto padrão com o id informado.
 	 * @param id		O id do projeto.
@@ -54,13 +51,13 @@ public final class FabricaDeObjetos {
 	 * @see Projeto
 	 */
     public static Projeto criarProjeto(String id) {
-        Projeto projeto = new Projeto();
-        projeto.setId(id);
-        projeto.setConfiguracao(criarConfiguracao(id));
-        projeto.setVersaoAtual(criarVersao(RESULTADO_EQUACAO_ATUAL));
-        projeto.setVersaoAnterior(criarVersao(RESULTADO_EQUACAO_ANTERIOR));
-        projeto.setGerenteDeProjeto(criarGerenteDeProjeto());
-        return projeto;
+        return new Projeto(
+        		criarGerenteDeProjeto(),
+        		EnumStatusDoProjeto.SEM_ALTERACOES,
+        		criarVersao(RESULTADO_EQUACAO_ANTERIOR),
+        		criarVersao(RESULTADO_EQUACAO_ATUAL),
+        		criarConfiguracao(id),
+        		id);        
     }
 
     /**
@@ -109,13 +106,8 @@ public final class FabricaDeObjetos {
      * @return 	A versão do projeto.
      * @see Versao
      */
-    public static Versao criarVersao(Float resultadoEquacao) {
-        Versao versao = new Versao();
-        versao.setData(Calendar.getInstance());
-        versao.setMetricas(criarMapMetricas());
-        versao.setNivel(EnumNivelDoProjeto.SATISFATORIO);
-        versao.setResultadoDaEquacao(resultadoEquacao);
-        return versao;
+    public static Versao criarVersao(Float resultadoEquacao) { 
+        return new Versao(Calendar.getInstance(),resultadoEquacao,criarMapMetricas(),EnumNivelDoProjeto.SATISFATORIO);
     }
 
     /**
@@ -124,10 +116,7 @@ public final class FabricaDeObjetos {
      * @see GerenteDeProjeto
      */
     public static GerenteDeProjeto criarGerenteDeProjeto() {
-        GerenteDeProjeto gerente = new GerenteDeProjeto();
-        gerente.setNome("José da silva");
-        gerente.setEmail("josedasilva@gmail.com");
-        return gerente;
+        return new GerenteDeProjeto("José da silva","josedasilva@gmail.com");
     }
 
 

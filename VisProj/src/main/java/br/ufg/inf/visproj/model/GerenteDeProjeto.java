@@ -47,7 +47,6 @@ public class GerenteDeProjeto {
      * @param email O email do gerente.
      */
     public GerenteDeProjeto(String nome, String email) {
-		super();
 		this.nome = nome;
 		this.email = email;
 	}

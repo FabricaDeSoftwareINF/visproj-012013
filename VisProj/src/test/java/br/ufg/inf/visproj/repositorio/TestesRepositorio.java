@@ -6,6 +6,7 @@ import br.ufg.inf.visproj.util.FabricaDeObjetos;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -58,14 +59,14 @@ public class TestesRepositorio {
         repositorio.salvarOuAtualizarProjeto(projeto);
         Projeto projetoConsultado = repositorio.consultarProjeto(projeto.getId());
 
-        assertNotNull(projetoConsultado);
-        assertEquals(projetoConsultado.getId(), projeto.getId());
-
+        Assert.assertNotNull(projetoConsultado);
+        Assert.assertEquals(projetoConsultado.getId(), projeto.getId());
 
         repositorio.excluirProjeto(projeto.getId());
 
     }   
 
+    @Test
     public void testaSalvarProjetoExistente() throws IOException, JAXBException {
         Configuracao config = new Configuracao();
         config.setEquacao("Equacao");
@@ -80,47 +81,53 @@ public class TestesRepositorio {
 
     }
 
-    public void testaConsultarProjetoExistente() throws JAXBException {
-        Projeto projetoConsultado = repositorio.consultarProjeto(this.projeto.getId());
-        // Assert.isNotNull();
+    @Test
+    public void testaConsultarProjetoExistente() throws JAXBException
+    {
+        Projeto projetoConsultado = repositorio.consultarProjeto(projeto.getId());
+        Assert.assertNotNull(projetoConsultado);
 
     }
 
+    @Test
     public void testaConsultarProjetoInexistente() throws JAXBException {
         Projeto projetoConsultado = repositorio.consultarProjeto("batema");
-        // Assert.isNull();
-
+        Assert.assertNull(projetoConsultado);
     }
 
+    @Test
     public void testaConsultarConfiguracaoExistente() throws JAXBException {
-        Configuracao config = repositorio.consultarConfiguracao(this.projeto.getConfiguracao().getId());
-        //     Assert.IsNotNull();
+        
+		Configuracao config = repositorio.consultarConfiguracao(this.projeto.getConfiguracao().getId());
+        Assert.assertNotNull(config);
         //objeto config deve ser comparado com o projeto this.projeto.getConfiguracao
         //devera ser comparada todas as propriedades do objeto configuracao.
     }
 
+    @Test
     public void testaConsultarConfiguracaoInexistente() throws JAXBException {
-        Configuracao config = repositorio.consultarConfiguracao(this.projeto.getConfiguracao().getId());
-        //Asset.isNull()   ;
+        Configuracao config = repositorio.consultarConfiguracao("idinexistente");
+        Assert.assertNull(config);
 
     }
 
+    @Test
     public void testaConsultarListadeProjetosExistentes() throws JAXBException {
         List<Projeto> listaProjetos = repositorio.consultarListaProjetos();
-        //Assert.isNotNull();
-        //Assert.areEquals(1, listaProjetos.size());
+        Assert.assertNotNull(listaProjetos);
+        Assert.assertEquals(1, listaProjetos.size());
         //devera analisar a qualidade de projetos que a listaProjetos conseguiu retornar.
         //neste caso como somente um projeto foi cadastrado Globalmente, o resultado devera ser igual a 1.
         //devera ser criado um for que chama o metodo que compara projetos
         //para comparar todos os projetos que foram retornados na listaProjetos()
     }
 
+    @Test
     public void testaConsultarListadeProjetoInexistentes() throws JAXBException, IOException {
         repositorio.excluirProjeto(this.projeto.getId());
         List<Projeto> listaProjetos;
         listaProjetos = repositorio.consultarListaProjetos();
-        //Assert.areEquals(0 , listaProjetos.size());  ---- size = zero significa que nao existe projetos.
-        //devera ser retornado a lista vazia, com zero projetos cadastrados.
+        Assert.assertEquals(0 , listaProjetos.size());
         if (listaProjetos.size() == 0) {
             repositorio.salvarOuAtualizarProjeto(this.projeto);
         }
