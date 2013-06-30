@@ -34,6 +34,7 @@ public class TestesRepositorio {
     @BeforeClass //construtor devera ser vinculado ao @BeforeClass dentro do junit.
     public static void beforeClass() throws IOException {
         repositorio = new Repositorio();
+        repositorio.criaDiretorio();
         repositorio.limpaDiretorio();
         projeto = FabricaDeObjetos.criarProjeto("X9");
         repositorio.salvarOuAtualizarProjeto(projeto);

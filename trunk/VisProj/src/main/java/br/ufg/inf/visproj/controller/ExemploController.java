@@ -21,6 +21,9 @@ GNU-GPL.
 
 package br.ufg.inf.visproj.controller;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Post;
@@ -31,6 +34,7 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.caelum.vraptor.view.Results;
 import br.ufg.inf.visproj.model.GerenteDeProjeto;
+import br.ufg.inf.visproj.repositorio.Repositorio;
 
 /**
  * Repositorio
@@ -79,14 +83,14 @@ public class ExemploController {
 	 */ 
 	@Post("/upload/file")
 	public void atualizarConfiguracao(UploadedFile file) {
-		//System.out.println("AKI MSM" + "    " + file);
 		final boolean arquivoValido = file != null && file.getContentType().startsWith("image");
 		validator.checking(new Validations(){
 			{				
 				that(arquivoValido,"erro", "arquivo.invalido");				
 			}
 		});
-		System.out.println(file.getFileName());
+		
+		Logger.getLogger("UploadFile").log(Level.SEVERE, file.getFileName());
 		validator.onErrorRedirectTo(ExemploController.class).index();
 		result.use(Results.representation()).from("teste").serialize();
 		result.redirectTo(ExemploController.class).index();

@@ -46,7 +46,6 @@ public class Repositorio implements IRepositorio {
     private static final String PATH = "Projetos";
 
     public Repositorio() {
-    	criaDiretorio();
     }
 
     public void criaDiretorio(){
