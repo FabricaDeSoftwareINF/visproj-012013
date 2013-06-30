@@ -65,7 +65,7 @@ public class TestesProjetoService  {
 	}
 	
 	private List<Projeto> getListaDeProjetosEsperados(){
-		Projeto projeto = FabricaDeObjetos.criarProjeto("1");
+		Projeto projeto = FabricaDeObjetos.getInstancia().criarProjeto("1");
 		List<Projeto> projetos = new ArrayList<Projeto>();
 		projetos.add(projeto);
 		
