@@ -31,7 +31,7 @@ import java.util.*;
  * para objetos comuns necessários nos testes.
  *
  */ 
-public class FabricaDeObjetos {
+public final class FabricaDeObjetos {
 
 	private static final Float RESULTADO_EQUACAO_ANTERIOR = 80f;
 	private static final Float RESULTADO_EQUACAO_ATUAL = 90f;
