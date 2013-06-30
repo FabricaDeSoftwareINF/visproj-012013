@@ -1,14 +1,37 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+ /**
+  * Esse documento é parte do código fonte e artefatos relacionados 
+  * ao projeto VisProj, em desenvolvimento pela Fábrica de Software
+  * da UFG.
+  * 
+  *  Links relevantes:
+  *  Fábrica de Software: http://fs.inf.ufg.br/
+  *  Instituto de Informática UFG: http://www.inf.ufg.br
+  *
+  * Copyleft © UFG.
+  * 
+  * Licenciado sobre a licença GNU-GPL v3
+  *  * Você pode obter uma cópia da licença em 
+http://www.gnu.org/licenses/gpl.html
+  * 
+  * A menos que especificado ou exigido por legislação local, o software é 
+  * fornecido "da maneira que está", sem garantias ou condições de qualquer 
+  * tipo, nem expressas nem implícitas. Em caso de dúvidas referir a licença 
+GNU-GPL.
+  */ 
+
 package br.ufg.inf.visproj.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author ArturPascualote
- */
+ * Projeto
+ *
+ * Representa a entidade Projeto.
+ *
+ * A anotação @XmlRootElement significa que o classe é um elemento
+ * raiz quando for convertida em um XML.
+ *
+ */ 
 @XmlRootElement
 public class Projeto {
 
@@ -88,29 +111,5 @@ public class Projeto {
 
     public void setVersaoAtual(Versao versaoAtual) {
         this.versaoAtual = versaoAtual;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        //nenhum objeto pode ser igual a null
-        if (obj == null) {
-            return false; 
-        }
-        //um projeto ser pode ser igual a outro projeto
-        if (!(obj instanceof Projeto)) { 
-            return false;
-        }
-
-        final Projeto outroProjeto = (Projeto) obj;
-
-        //se nao houver Id nao ha como testar os dois projetos
-        if (getId() == null) 
-        {
-            return false;
-        }
-        
-        //dois projetos serao iguais se seus Id's forem iguais
-        return getId().equals(outroProjeto.getId()); 
     }
 }
