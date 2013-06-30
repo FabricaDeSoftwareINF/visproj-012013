@@ -34,7 +34,6 @@ import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.caelum.vraptor.view.Results;
 import br.ufg.inf.visproj.model.GerenteDeProjeto;
-import br.ufg.inf.visproj.repositorio.Repositorio;
 
 /**
  * Repositorio
@@ -52,6 +51,11 @@ public class ExemploController {
     private final Result result;
 	private final Validator validator;
 
+	/**
+	 * 
+	 * @param result O result das requisições responsável pelo direcionamento de páginas.
+	 * @param validator O validador padrão do framework vraptor.
+	 */
 	public ExemploController(Result result, Validator validator) {
 		this.result = result;
 		this.validator = validator;
@@ -70,7 +74,7 @@ public class ExemploController {
 		gerente.setNome("joão da silva");
 		gerente.setEmail("email");
 		result.include("variable", "VRaptor!");
-		System.out.println(Results.representation());
+		Logger.getLogger("index").log(Level.SEVERE,null, Results.representation());
 		result.use(Results.representation()).from(gerente).serialize();
 	}
 	
