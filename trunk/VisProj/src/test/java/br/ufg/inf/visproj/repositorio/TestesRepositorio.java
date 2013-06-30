@@ -3,6 +3,8 @@ package br.ufg.inf.visproj.repositorio;
 import br.ufg.inf.visproj.model.Configuracao;
 import br.ufg.inf.visproj.model.Projeto;
 import br.ufg.inf.visproj.util.FabricaDeObjetos;
+
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -37,6 +39,15 @@ public class TestesRepositorio {
         repositorio.salvarOuAtualizarProjeto(projeto);
     }
 
+    @AfterClass
+    public static void afterClass() throws IOException {
+        repositorio.limpaDiretorio();
+    }
+    
+    @After
+    public void after(){
+    	repositorio.removaDiretorio();
+    }
 
     @Test
     public void testaSalvarProjetoInexistente() throws IOException, JAXBException {
@@ -52,12 +63,7 @@ public class TestesRepositorio {
 
         repositorio.excluirProjeto(projeto.getId());
 
-    }
-
-    @AfterClass //construtor devera ser vinculado ao @BeforeClass dentro do junit.
-    public static void afterClass() throws IOException {
-        repositorio.limpaDiretorio();
-    }
+    }   
 
     public void testaSalvarProjetoExistente() throws IOException, JAXBException {
         Configuracao config = new Configuracao();

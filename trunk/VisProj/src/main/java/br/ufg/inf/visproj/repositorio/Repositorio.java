@@ -1,3 +1,24 @@
+ /**
+  * Esse documento é parte do código fonte e artefatos relacionados 
+  * ao projeto VisProj, em desenvolvimento pela Fábrica de Software
+  * da UFG.
+  * 
+  *  Links relevantes:
+  *  Fábrica de Software: http://fs.inf.ufg.br/
+  *  Instituto de Informática UFG: http://www.inf.ufg.br
+  *
+  * Copyleft © UFG.
+  * 
+  * Licenciado sobre a licença GNU-GPL v3
+  *  * Você pode obter uma cópia da licença em 
+http://www.gnu.org/licenses/gpl.html
+  * 
+  * A menos que especificado ou exigido por legislação local, o software é 
+  * fornecido "da maneira que está", sem garantias ou condições de qualquer 
+  * tipo, nem expressas nem implícitas. Em caso de dúvidas referir a licença 
+GNU-GPL.
+  */ 
+
 package br.ufg.inf.visproj.repositorio;
 
 import br.ufg.inf.visproj.model.Configuracao;
@@ -8,34 +29,32 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.IOException;
-import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by IntelliJ IDEA.
- * Package: br.ufg.inf.visproj.repositorio
- * Class: Repositorio
- * User: ArthurNote
- * Date: 22/05/13
- * Time: 19:47
- * To change this template use File | Settings | File Templates.
- */
-
+ * Repositorio
+ *
+ * Esta classe tem o propósito de persistir ou obter dados do
+ * repositório de arquivos e converter no objeto correspondente.
+ *
+ */ 
 public class Repositorio implements IRepositorio {
 
-
-    private final boolean DIRETORIO_CRIADO;
-    private final String PATH = "Projetos";
-    private File arquivo;
-
+    private static final String PATH = "Projetos";
 
     public Repositorio() {
-        this.DIRETORIO_CRIADO = new File(PATH).mkdir();
+    	criaDiretorio();
     }
 
+    public void criaDiretorio(){
+    	File file = new File(PATH);
+    	if(!file.exists() || (file.exists() && !file.isDirectory())){
+    		file.mkdir();
+    	}
+    }
 
     public Projeto consultarProjeto(String id) throws JAXBException {
 
@@ -58,12 +77,11 @@ public class Repositorio implements IRepositorio {
             return projeto.getConfiguracao();
         }
 
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return null;
     }
 
     public boolean salvarOuAtualizarProjeto(Projeto projeto) throws IOException {
         JAXBContext jaxbCtx = null;
-        StringWriter xmlWriter = null;
         Marshaller jaxbMarshaller = null;
 
         if (projeto.getId() == null || projeto.getId().isEmpty()) {
@@ -74,8 +92,6 @@ public class Repositorio implements IRepositorio {
             File file = new File(getPathCompleto(projeto.getId()));
 
             jaxbCtx = JAXBContext.newInstance(Projeto.class);
-
-            //xmlWriter = new StringWriter();
             jaxbMarshaller = jaxbCtx.createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
@@ -87,9 +103,7 @@ public class Repositorio implements IRepositorio {
                     null, ex);
 
             return false;
-
         }
-
     }
 
     public List<Projeto> consultarListaProjetos() throws JAXBException {
@@ -131,13 +145,21 @@ public class Repositorio implements IRepositorio {
             for (int i = 0; i < files.length; i++) {
                 files[i].delete();
             }
-            file.delete();
 
-            file.mkdir();
             return true;
         }
 
         return false;
+    }
+    
+    public boolean removaDiretorio(){
+    	File file = new File(PATH);
+    	if(file.exists() && file.isDirectory() && file.listFiles().length == 0){
+    		file.delete();
+    		return true;
+    	}
+    	
+    	return false;
     }
 
     private String getPathCompleto(String nomeArquivo) {

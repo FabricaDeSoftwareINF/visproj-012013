@@ -20,14 +20,14 @@
     <script type="text/javascript">
     </script>
 
-    <title>Insert title here</title>
+    <title><fmt:message key="configuracao"/></title>
 </head>
 <body>
 <div id="pagina" style="width:760px; margin:0 auto;">
     <div id="conteudo" style="padding:5px;padding-top:160px;">
         <form id="formFileupload" style="padding-left:150px" action="<c:url value='upload/file'/>" method="POST"
               enctype="multipart/form-data">
-            <label for="fileupload">Arquivo de configuração:</label>
+            <label for="fileupload"><fmt:message key="arquivo.de.configuracao"/>:</label>
 
             <div class="fileupload fileupload-new" data-provides="fileupload" id="fileupload">
                 <div class="input-append">
@@ -36,15 +36,15 @@
                         <span class="fileupload-preview"></span>
                     </div>
 			    <span class="btn btn-file btn-primary">
-				    <span class="fileupload-new">Selecione o arquivo</span>
-				    <span class="fileupload-exists">Alterar</span>
+				    <span class="fileupload-new"><fmt:message key="selecione.o.arquivo"/></span>
+				    <span class="fileupload-exists"><fmt:message key="alterar"/></span>
 				    <input type="file" name="file" id="selecionarArquivo"/>
 			    </span>
-                    <a href="#" class="btn btn-primary fileupload-exists" data-dismiss="fileupload">Excluir</a>
+                    <a href="#" class="btn btn-primary fileupload-exists" data-dismiss="fileupload"><fmt:message key="excluir"/></a>
                 </div>
             </div>
             <button href="#" class="btn btn-primary" style="margin-bottom:19px">
-                <i class="icon-white icon-upload"></i>Enviar arquivo
+                <i class="icon-white icon-upload"></i><fmt:message key="enviar.arquivo"/>
             </button>
             <br/>
 
