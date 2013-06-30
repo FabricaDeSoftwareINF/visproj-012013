@@ -55,6 +55,9 @@ public class ExemploController {
 	 * 
 	 * @param result O result das requisições responsável pelo direcionamento de páginas.
 	 * @param validator O validador padrão do framework vraptor.
+	 * 
+	 * @see Result
+	 * @see Validator 
 	 */
 	public ExemploController(Result result, Validator validator) {
 		this.result = result;
@@ -66,6 +69,10 @@ public class ExemploController {
 	 * index - É o método que retorna a página padrão inicial do projeto.
 	 * 
 	 * @since 22/05/2013
+	 * 
+	 * @see Get
+	 * @see Path
+	 *   
 	 */ 
 	@Get
 	@Path("/index.html")
@@ -84,6 +91,10 @@ public class ExemploController {
 	 * @param file
 	 * 
 	 * @since 13/06/2013
+	 * 
+	 * @see Post
+	 * @see UploadedFile 
+	 * 
 	 */ 
 	@Post("/upload/file")
 	public void atualizarConfiguracao(UploadedFile file) {
