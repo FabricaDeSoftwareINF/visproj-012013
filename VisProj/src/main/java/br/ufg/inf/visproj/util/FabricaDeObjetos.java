@@ -47,6 +47,12 @@ public final class FabricaDeObjetos {
 	private FabricaDeObjetos(){		
 	}
 	
+	/**
+	 * criarProjeto  -	Cria um projeto padrão com o id informado.
+	 * @param id		O id do projeto.
+	 * @return			O projeto criado.
+	 * @see Projeto
+	 */
     public static Projeto criarProjeto(String id) {
         Projeto projeto = new Projeto();
         projeto.setId(id);
@@ -57,26 +63,29 @@ public final class FabricaDeObjetos {
         return projeto;
     }
 
+    /**
+     * criarConfiguracao	Cria uma configuracao conforme id do projeto informado.
+     * @param id			O id do projeto e da configuracao.
+     * @return				A configuracao criada.
+     * @see Configuracao
+     */
     public static Configuracao criarConfiguracao(String id) {
         Configuracao config = new Configuracao();
         config.setId(id);
         config.setEquacao("equacao");
         config.setMetricas(criarMetricasConfiguracao());
-        config.setNivelInsatisfatorio(criarNivel(INICIO_VALOR_SATISFATORIO, FIM_VALOR_SATISFATORIO, MELHORA_QUANDO_MAIOR));
-        config.setNivelPoucoSatisfatorio(criarNivel(INICIO_VALOR_POUCO_SATISFATORIO, FIM_VALOR_POUCO_SATISFATORIO, MELHORA_QUANDO_MAIOR));
-        config.setNivelSatisfatorio(criarNivel(INICIO_VALOR_INSATISFATORIO, FIM_VALOR_INSATISFATORIO, MELHORA_QUANDO_MAIOR));
+        config.setNivelInsatisfatorio(new Nivel(INICIO_VALOR_SATISFATORIO, FIM_VALOR_SATISFATORIO, MELHORA_QUANDO_MAIOR));
+        config.setNivelPoucoSatisfatorio(new Nivel(INICIO_VALOR_POUCO_SATISFATORIO, FIM_VALOR_POUCO_SATISFATORIO, MELHORA_QUANDO_MAIOR));
+        config.setNivelSatisfatorio(new Nivel(INICIO_VALOR_INSATISFATORIO, FIM_VALOR_INSATISFATORIO, MELHORA_QUANDO_MAIOR));
 
         return config;
     }
 
-    public static Nivel criarNivel(Float valorInicial, Float valorFinal, boolean melhorQuandoMaior) {
-        Nivel nivel = new Nivel();
-        nivel.setValorInicial(valorInicial);
-        nivel.setValorFinal(valorFinal);
-        nivel.setMelhorQuandoMaior(melhorQuandoMaior);
-        return nivel;
-    }
-
+    /**
+     * criarMapMetricas  - 	Cria um map de métricas do projeto padrão.
+     * @return 				O map das métricas com o tipo <code>String</code> sendo a chave 
+     * 						e <code>Float</code> sendo o valor.
+     */
     public static Map<String, Float> criarMapMetricas() {
         Map<String, Float> metricas = new HashMap<>();
         metricas.put("complexidade", METRICA_COMPLEXIDADE);
@@ -84,12 +93,22 @@ public final class FabricaDeObjetos {
         return metricas;
     }
 
+    /**
+     * criarMetricasConfiguracao -	Cria um <code>Set</code> de métricas da configuração padrão.
+     * @return						As métricas da configuração.
+     */
     public static Set<String> criarMetricasConfiguracao() {
         Set<String> metricas = new HashSet<>();
         metricas.add("complexidade");
         return metricas;
     }
 
+    /**
+     * criarVersao - 				Cria uma versão do projeto.
+     * @param 	resultadoEquacao	O resultado da equação.
+     * @return 	A versão do projeto.
+     * @see Versao
+     */
     public static Versao criarVersao(Float resultadoEquacao) {
         Versao versao = new Versao();
         versao.setData(Calendar.getInstance());
@@ -99,6 +118,11 @@ public final class FabricaDeObjetos {
         return versao;
     }
 
+    /**
+     * criarGerenteDeProjeto - Cria um gerente de projeto padrão.
+     * @return O gerente de projeto.
+     * @see GerenteDeProjeto
+     */
     public static GerenteDeProjeto criarGerenteDeProjeto() {
         GerenteDeProjeto gerente = new GerenteDeProjeto();
         gerente.setNome("José da silva");
