@@ -14,9 +14,6 @@ import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 /**
  * Created by IntelliJ IDEA.
  * Package: br.ufg.inf.visproj.repositorio
@@ -125,8 +122,7 @@ public class TestesRepositorio {
     @Test
     public void testaConsultarListadeProjetoInexistentes() throws JAXBException, IOException {
         repositorio.excluirProjeto(this.projeto.getId());
-        List<Projeto> listaProjetos;
-        listaProjetos = repositorio.consultarListaProjetos();
+        List<Projeto> listaProjetos = repositorio.consultarListaProjetos();
         Assert.assertEquals(0 , listaProjetos.size());
         if (listaProjetos.size() == 0) {
             repositorio.salvarOuAtualizarProjeto(this.projeto);
