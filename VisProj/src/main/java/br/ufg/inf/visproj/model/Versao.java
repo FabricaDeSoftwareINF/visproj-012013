@@ -41,6 +41,9 @@ public class Versao {
     private Map<String, Float> metricas;
     private EnumNivelDoProjeto nivel;
 
+    /**
+     * Inicia esta instância com o nível <code>EnumNivelDoProjeto.NENHUM</code>.
+     */
     public Versao() {
         this.nivel = EnumNivelDoProjeto.NENHUM;
     }   

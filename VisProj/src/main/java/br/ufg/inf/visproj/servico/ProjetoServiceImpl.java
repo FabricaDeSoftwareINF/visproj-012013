@@ -49,10 +49,17 @@ public class ProjetoServiceImpl implements IProjetoService{
     
     private IRepositorio repositorio;
     
+    /**
+     * O construtor padrão que inicia o repositório.
+     */
     public ProjetoServiceImpl(){
         this.repositorio = new Repositorio();
     }
     
+    /**
+     * O construtor do <code>ProjetoServiceImpl</code>.
+     * @param repositorio O repositorio padrão.
+     */
     public ProjetoServiceImpl(IRepositorio repositorio){
     	this.repositorio = repositorio;
     }
