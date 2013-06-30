@@ -35,17 +35,60 @@ import java.util.List;
  */ 
 public interface IRepositorio {
 
+	/**
+     * consultarProjeto - Método responsável por consultar um projeto pelo id.
+     * @param id	O id do projeto 
+     * @return 		O <code>Projeto</code> consultado.
+     * @exception	JAXBException se houver algum problema na conversão. 
+     * @see Projeto
+     */
     Projeto consultarProjeto(String id) throws JAXBException;
 
+    /**
+     * consultarConfiguracao - Método responsável por consultar uma configuração pelo id do projeto.
+     * @param 	idProjeto		O id do projeto.
+     * @return 					A Configuracao consultada.
+     * @exception				JAXBException Se houver algum problema na conversão.
+     * @see 	Configuracao
+     */
     Configuracao consultarConfiguracao(String idProjeto) throws JAXBException;
 
+    /**
+     * salvarOuAtualizarProjeto	 -	Salva ou atualiza o projeto informado.	
+     * @param projeto 				O projeto que deverá ser salvo ou atualizado.
+     * @return						<code>true</code> se o projeto foi salvo ou atualizado ou
+     * 								<code>false</code> caso contrário.
+     * @throws IOException			Se houver problema para gravar o arquivo.
+     * @see Projeto
+     * @since 1.0
+     */    
     boolean salvarOuAtualizarProjeto(Projeto projeto) throws IOException;
 
+    /**
+     * consultarListaProjetos -	Consulta todos os projetos armazenados no diretório padrão.
+     * @return 					A lista de projetos existentes.
+     * @throws JAXBException	Se houver problema na conversão.
+     * @see Projeto
+     */
     List<Projeto> consultarListaProjetos() throws JAXBException;
 
+    /**
+     * excluirProjeto     - 	exclui o projeto do id informado.
+     * @param id				O id do projeto.
+     * @return 					<code>true</code> se o projeto foi excluido ou <code>false</code> caso contrário.
+     * @throws JAXBException	Se houver problema na conversão.
+     */
     boolean excluirProjeto(String id) throws JAXBException;
 
+    /**
+     * limpaDiretorio 	- 	Limpa todos os arquivos armazenados no diretório padrão.
+     * @return 				<code>true</code> caso o diretório foi limpo ou <code>false</code> caso contrário.
+     */
     boolean limpaDiretorio();
     
+    /**
+     * removaDiretorio - Remove o diretório em que os projetos estão armazenados.
+     * @return <code>true</code> caso o diretório foi removido ou <code>false</code> caso contrário.
+     */
     boolean removaDiretorio();
 }
