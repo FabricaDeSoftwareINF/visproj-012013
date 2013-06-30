@@ -63,9 +63,7 @@ public class Repositorio implements IRepositorio {
             return null;
         }
 
-        JAXBContext jaxbCtx = null;
-        jaxbCtx = JAXBContext.newInstance(Projeto.class);
-        Projeto projetoConsultado = (Projeto) jaxbCtx.createUnmarshaller().unmarshal(file);
+        Projeto projetoConsultado = ConvertaArquivoParaObjeto(file);
 
         return projetoConsultado;
     }
@@ -136,15 +134,10 @@ public class Repositorio implements IRepositorio {
         File files[] = file.listFiles();
         
         List<Projeto> listaDeProjetos = new ArrayList<>();
-        Logger.getLogger("consultarProjetosExistentes").log(Level.INFO, "tamanhoArquivo" + files.length);
         if (files != null && files.length >0) {
-        	Unmarshaller jaxbMarshaller = null;
-        	JAXBContext jaxbCtx = null;
             for (int i = 0; i < files.length; i++) {
-                
-                jaxbCtx = JAXBContext.newInstance(Projeto.class);
-                jaxbMarshaller = jaxbCtx.createUnmarshaller();
-                Projeto projetoConsultado = (Projeto) jaxbMarshaller.unmarshal(files[i]);
+
+                Projeto projetoConsultado = ConvertaArquivoParaObjeto(files[i]);
                 listaDeProjetos.add(projetoConsultado);
             }
         }
@@ -216,5 +209,11 @@ public class Repositorio implements IRepositorio {
     private String getPathCompleto(String nomeArquivo) {
 
         return PATH + "\\" + nomeArquivo + ".xml";
+    }
+    
+    private Projeto ConvertaArquivoParaObjeto(File file) throws JAXBException{
+    	JAXBContext jaxbCtx = null;
+        jaxbCtx = JAXBContext.newInstance(Projeto.class);
+        return (Projeto) jaxbCtx.createUnmarshaller().unmarshal(file);
     }
 }
