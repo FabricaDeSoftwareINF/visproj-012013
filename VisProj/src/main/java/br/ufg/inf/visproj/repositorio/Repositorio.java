@@ -54,7 +54,7 @@ public class Repositorio implements IRepositorio {
     		file.mkdir();
     	}
     }
-
+    
     public Projeto consultarProjeto(String id) throws JAXBException {
 
         File file = new File(getPathCompleto(id));
