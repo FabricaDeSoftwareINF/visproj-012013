@@ -56,10 +56,11 @@ public enum EnumStatusDoProjeto {
         this.statusDoProjeto = statusDoProjeto;
     }
 
-    //Método get
+    /**
+     * getStatusDoProjeto Obtém o status do projeto.
+     * @return o status do projeto.
+     */
     public String getStatusDoProjeto() {
         return this.statusDoProjeto;
     }
-
-
 }
