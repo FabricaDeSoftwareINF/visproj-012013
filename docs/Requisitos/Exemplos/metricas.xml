@@ -1,0 +1,29 @@
+<metricas>
+	<projeto>
+		<idProjeto>1</idProjeto>
+		<listaMetricas>
+			<metrica>
+				<nome>Complexidade Ciclomática</nome>
+				<valor>2</valor>
+			</metrica>
+			<metrica>
+				<nome>Cobertura de Código</nome>
+				<valor>0.9</valor>
+			</metrica>
+		</listaMetricas>
+	</projeto>
+	<projeto>
+		<idProjeto>2</idProjeto>
+		<listaMetricas>
+			<metrica>
+				<nome>Complexidade Ciclomática</nome>
+				<valor>5</valor>
+			</metrica>
+			<metrica>
+				<nome>Cobertura de Código</nome>
+				<valor>0.6</valor>
+			</metrica>
+		</listaMetricas>
+	</projeto>
+</metricas>
+
