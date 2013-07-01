@@ -196,6 +196,7 @@ public class Repositorio implements IRepositorio {
         return (Projeto) jaxbCtx.createUnmarshaller().unmarshal(file);
     }
     
+    
     private void convertaObjetoParaArquivo(Projeto projeto) throws JAXBException{
     	File file = new File(getPathCompleto(projeto.getId()));
     	JAXBContext jaxbCtx = null;
