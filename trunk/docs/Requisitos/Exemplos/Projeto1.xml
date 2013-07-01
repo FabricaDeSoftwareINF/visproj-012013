@@ -1,0 +1,27 @@
+<projeto>
+	<idProjeto>1</idProjeto>
+	<equacao>C-C*C</equacao>
+	<listaMetricas>
+		<metrica>Complexidade Ciclomática</metrica>
+		<metrica>Cobertura de Código</metrica>
+		<metrica>Classes Duplicadas</metrica>
+	</listaMetricas>
+	<nivel>
+		<satisfatorio>
+			<valorInicial>1</valorInicial>
+			<valorFinal>10</valorFinal>
+			<melhorQuandoMaior>5</melhorQuandoMaior>
+		</satisfatorio>
+		<inSatisfatorio>
+			<valorInicial>11</valorInicial>
+			<valorFinal>20</valorFinal>
+			<melhorQuandoMaior>15</melhorQuandoMaior>
+		</inSatisfatorio>
+		<poucoSatisfatorio>
+			<valorInicial>21</valorInicial>
+			<valorFinal>100</valorFinal>
+			<melhorQuandoMaior>50</melhorQuandoMaior>
+		</ poucoSatisfatorio>
+	</nivel>
+</projeto>
+
