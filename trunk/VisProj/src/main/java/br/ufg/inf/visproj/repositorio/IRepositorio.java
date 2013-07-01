@@ -51,6 +51,7 @@ public interface IRepositorio {
      * @exception				JAXBException Se houver algum problema na conversão.
      * @see 	Configuracao
      */
+        
     Configuracao consultarConfiguracao(String idProjeto) throws JAXBException;
 
     /**
