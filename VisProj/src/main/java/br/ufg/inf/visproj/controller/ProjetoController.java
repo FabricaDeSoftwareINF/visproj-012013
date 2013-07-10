@@ -46,7 +46,7 @@ import br.ufg.inf.visproj.model.GerenteDeProjeto;
  *
  */ 
 @Resource
-public class ExemploController {
+public class ProjetoController {
 	
     private final Result result;
 	private final Validator validator;
@@ -59,11 +59,15 @@ public class ExemploController {
 	 * @see Result
 	 * @see Validator 
 	 */
-	public ExemploController(Result result, Validator validator) {
+	public ProjetoController(Result result, Validator validator) {
 		this.result = result;
 		this.validator = validator;
 	}
 
+	
+	public void home(){		
+	}
+	
 	/**
 	 * 
 	 * index - É o método que retorna a página padrão inicial do projeto.
@@ -75,8 +79,8 @@ public class ExemploController {
 	 *   
 	 */ 
 	@Get
-	@Path("/index.html")
-	public void index() {
+	@Path("/inicio")
+	public void inicio() {
 		GerenteDeProjeto gerente = new GerenteDeProjeto();
 		gerente.setNome("joão da silva");
 		gerente.setEmail("email");
@@ -84,6 +88,7 @@ public class ExemploController {
 		Logger.getLogger("index").log(Level.SEVERE,null, Results.representation());
 		result.use(Results.representation()).from(gerente).serialize();
 	}
+	
 	
 	/**
 	 * atualizarConfiguracao - é o método que atualiza a configuração do projeto.
@@ -104,10 +109,14 @@ public class ExemploController {
 				that(arquivoValido,"erro", "arquivo.invalido");				
 			}
 		});
+		System.out.println(file);
+		if(file!=null){
+			Logger.getLogger("UploadFile").log(Level.SEVERE, file.getFileName());
+		}
 		
-		Logger.getLogger("UploadFile").log(Level.SEVERE, file.getFileName());
-		validator.onErrorRedirectTo(ExemploController.class).index();
-		result.use(Results.representation()).from("teste").serialize();
-		result.redirectTo(ExemploController.class).index();
+		result.use(Results.json()).from(true).serialize();
+		//validator.onErrorRedirectTo(ProjetoController.class).home();
+		//validator.onErrorRedirectTo(ProjetoController.class).inicio();
+		//result.redirectTo(ProjetoController.class).home();
 	}	
 }

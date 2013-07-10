@@ -166,6 +166,7 @@ $("#myCarousel").on("slid",function(a,b,c,d){
 		var a = "dispara Ajax";
 	};
 });
+
 $(function(){
 	var data = [];
 	data.nivel=0;
@@ -197,9 +198,9 @@ $(function(){
 	
 	adicioneNovoItem(data);
 	adicioneNovoItem(data2);
-	adicioneNovoItem(data4);
-	
+	adicioneNovoItem(data4);	
 	adicioneNovoItem(data3);
+	
 	debugger;
 	$('.carousel').carousel({
 		  interval: 2000

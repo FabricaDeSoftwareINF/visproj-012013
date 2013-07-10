@@ -1,0 +1,10 @@
+	#header {
+		height: 40px;
+		background: #F1F1F1;
+	}
+	
+	#header img {
+		height: 32px;
+		padding-right: 10px;
+		float: right;
+	}
