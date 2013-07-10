@@ -28,6 +28,7 @@ import br.ufg.inf.visproj.repositorio.Repositorio;
 import br.ufg.inf.visproj.repositorio.IRepositorio;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -75,6 +76,7 @@ public class ProjetoServiceImpl implements IProjetoService{
     	Configuracao configuracao = repositorio.consultarConfiguracao(projeto.getId());
     	projeto.setConfiguracao(configuracao);
     	projeto.getVersaoAtual().setResultadoDaEquacao(resultadoEquacao(projeto));
+    	projeto.getVersaoAtual().setData(Calendar.getInstance());
         repositorio.salvarOuAtualizarProjeto(projeto);
     }
 

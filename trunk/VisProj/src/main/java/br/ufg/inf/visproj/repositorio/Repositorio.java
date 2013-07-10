@@ -146,7 +146,7 @@ public class Repositorio implements IRepositorio {
      */
     public void criaDiretorio(){
     	File file = new File(PATH);
-    	if(!file.exists() || (file.exists() && !file.isDirectory())){
+    	if(!file.exists()){
     		file.mkdir();
     	}
     }
